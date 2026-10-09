@@ -1,51 +1,25 @@
 """
-Despachador de comandos que mapea subcomandos a funciones ejecutables
-consultando dinámicamente al registry.
+Despachador de comandos que mapea subcomandos a herramientas
+consultando al registry real.
 """
 
-import importlib
 import sys
 
 from escuadra.core import registry
 
-
-def _cargar_modulos_dinamicos() -> None:
-    """Carga dinámicamente los módulos de la carpeta 'modulos'."""
-    if registry.MODULOS_DIR.exists():
-        for archivo in registry.MODULOS_DIR.glob("*.py"):
-            if archivo.name != "__init__.py":
-                nombre_modulo = f"escuadra.modulos.{archivo.stem}"
-                try:
-                    importlib.import_module(nombre_modulo)
-                except (ImportError, ModuleNotFoundError):
-                    pass
-
-
 def dispatch(subcommand: str) -> int:
     """
-    Despacha un subcomando a su función ejecutable correspondiente.
+    Despacha un subcomando a su herramienta correspondiente.
 
     Args:
-        subcommand: Nombre del subcomando a ejecutar.
+        subcommand: Nombre del subcomando / herramienta a ejecutar.
 
     Returns:
-        Código de salida entero (0 para éxito).
-
-    Examples:
-        >>> dispatch("convert")
-        Ejecutando conversión...
-        0
-        >>> dispatch("desconocido")
-        Error: subcomando desconocido 'desconocido'
-        1
+        Código de salida entero (0 para éxito, 1 para error).
     """
-    # Forzamos el descubrimiento automático de submódulos antes de consultar
-    _cargar_modulos_dinamicos()
+    herramienta_cls = registry.buscar_por_nombre(subcommand)
 
-    tools = registry.get_tools()
-    handler = tools.get(subcommand)
-
-    if handler is None:
+    if herramienta_cls is None:
         print(
             f"Error: subcomando desconocido '{subcommand}'",
             file=sys.stderr,
@@ -53,10 +27,19 @@ def dispatch(subcommand: str) -> int:
         return 1
 
     try:
-        return handler()
+        # Instanciamos la herramienta para validar que existe y es usable
+        instancia = herramienta_cls()
+        # Si tiene método de ejecución CLI, lo llamamos si existe
+        if hasattr(instancia, "ejecutar"):
+            instancia.ejecutar()
+        elif hasattr(instancia, "run"):
+            instancia.run()
+        return 0
     except (ImportError, ModuleNotFoundError):
         print(
             "Error: El módulo solicitado no está disponible o no existe.",
             file=sys.stderr,
         )
+        return 1
+    except Exception:
         return 1
