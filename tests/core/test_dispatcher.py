@@ -1,38 +1,25 @@
-"""
-Pruebas para el módulo dispatcher.py
-"""
+import sys
+from unittest.mock import MagicMock, patch
+from escuadra.core import dispatcher
 
-from unittest.mock import patch, MagicMock
+def test_dispatch_subcomando_desconocido(capsys):
+    with patch("escuadra.core.registry.buscar_por_nombre", return_value=None):
+        codigo = dispatcher.dispatch("no_existe")
+    assert codigo == 1
+    captured = capsys.readouterr()
+    assert "subcomando desconocido" in captured.err
 
-from escuadra.core.dispatcher import dispatch
+def test_dispatch_subcomando_conocido():
+    mock_cls = MagicMock()
+    mock_instance = MagicMock()
+    mock_cls.return_value = mock_instance
+    with patch("escuadra.core.registry.buscar_por_nombre", return_value=mock_cls):
+        codigo = dispatcher.dispatch("karnaugh")
+    assert codigo == 0
+    mock_cls.assert_called_once()
 
-
-class TestDispatcher:
-    """Pruebas para las funciones del dispatcher"""
-
-    def test_dispatch_subcomando_valido(self):
-        """Verifica que dispatch ejecuta un subcomando válido"""
-        mock_herramienta = MagicMock()
-        mock_instancia = MagicMock()
-        mock_instancia.ejecutar.return_value = 0
-        mock_herramienta.return_value = mock_instancia
-
-        with patch('escuadra.core.registry.buscar_por_nombre', return_value=mock_herramienta):
-            resultado = dispatch('test_tool')
-            assert resultado == 0
-            mock_instancia.ejecutar.assert_called_once()
-
-    def test_dispatch_subcomando_desconocido(self):
-        """Verifica que dispatch maneja subcomandos desconocidos"""
-        with patch('escuadra.core.registry.buscar_por_nombre', return_value=None):
-            resultado = dispatch('comando_inexistente')
-            assert resultado == 1
-
-    def test_dispatch_error_importacion(self):
-        """Verifica que dispatch maneja errores de importación"""
-        mock_herramienta = MagicMock()
-        mock_herramienta.side_effect = ImportError("Módulo no encontrado")
-
-        with patch('escuadra.core.registry.buscar_por_nombre', return_value=mock_herramienta):
-            resultado = dispatch('tool_fallo')
-            assert resultado == 1
+def test_dispatch_error_importacion(capsys):
+    mock_cls = MagicMock(side_effect=ImportError("no disponible"))
+    with patch("escuadra.core.registry.buscar_por_nombre", return_value=mock_cls):
+        codigo = dispatcher.dispatch("falla")
+    assert codigo == 1
