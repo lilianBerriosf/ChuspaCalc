@@ -31,9 +31,9 @@ def dispatch(subcommand: str) -> int:
         instancia = herramienta_cls()
         # Si tiene método de ejecución CLI, lo llamamos si existe
         if hasattr(instancia, "ejecutar"):
-            instancia.ejecutar()
+           return instancia.ejecutar()
         elif hasattr(instancia, "run"):
-            instancia.run()
+            return instancia.run()
         return 0
     except (ImportError, ModuleNotFoundError):
         print(
