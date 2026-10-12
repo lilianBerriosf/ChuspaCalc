@@ -2,8 +2,6 @@
 Pruebas para el módulo progress.py (indicador de progreso)
 """
 
-import pytest
-import time
 from unittest.mock import patch, MagicMock
 
 from escuadra.ui.progress import mostrar_progreso, ProgressIndicator
@@ -79,14 +77,14 @@ class TestProgressIndicator:
     def test_progress_indicator_start(self):
         """Verifica que start inicia el indicador"""
         indicator = ProgressIndicator("Test")
-        
+
         with patch('builtins.print') as mock_print:
             with patch('threading.Thread') as mock_thread:
                 mock_thread_instance = MagicMock()
                 mock_thread.return_value = mock_thread_instance
-                
+
                 indicator.start()
-                
+
                 mock_print.assert_any_call("\nTest")
                 mock_thread.assert_called_once()
                 mock_thread_instance.start.assert_called_once()
@@ -97,10 +95,10 @@ class TestProgressIndicator:
         indicator = ProgressIndicator("Test")
         indicator._activo = True
         indicator.thread = MagicMock()
-        
+
         with patch('builtins.print') as mock_print:
             indicator.stop()
-            
+
             assert indicator._activo is False
             indicator.thread.join.assert_called_once()
             mock_print.assert_called_with("\n✔ terminado")
@@ -109,9 +107,9 @@ class TestProgressIndicator:
         """Verifica que stop maneja el caso sin thread"""
         indicator = ProgressIndicator("Test")
         indicator._activo = True
-        
+
         with patch('builtins.print') as mock_print:
             indicator.stop()
-            
+
             assert indicator._activo is False
             mock_print.assert_called_with("\n✔ terminado")

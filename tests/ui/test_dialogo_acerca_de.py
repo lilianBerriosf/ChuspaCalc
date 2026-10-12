@@ -24,29 +24,37 @@ class TestDialogoAcercaDe:
 
     def test_mostrar_acerca_de_instancia(self, app, qtbot):
         """Verifica que mostrar_acerca_de se ejecuta sin error"""
-        try:
-            mostrar_acerca_de()
-        except Exception as e:
-            pytest.fail(f"mostrar_acerca_de lanzó excepción: {e}")
+        with patch('escuadra.ui.dialogo_acerca_de.QMessageBox') as MockQMessageBox:
+            mock_messagebox = MagicMock()
+            MockQMessageBox.about = mock_messagebox
+
+            try:
+                mostrar_acerca_de()
+            except Exception as e:
+                pytest.fail(f"mostrar_acerca_de lanzó excepción: {e}")
 
     def test_mostrar_acerca_de_con_parent(self, app, qtbot):
         """Verifica que mostrar_acerca_de funciona con un parent (widget real)"""
         parent = QWidget()
         qtbot.addWidget(parent)
-        
-        try:
-            mostrar_acerca_de(parent)
-        except Exception as e:
-            pytest.fail(f"mostrar_acerca_de con parent lanzó excepción: {e}")
+
+        with patch('escuadra.ui.dialogo_acerca_de.QMessageBox') as MockQMessageBox:
+            mock_messagebox = MagicMock()
+            MockQMessageBox.about = mock_messagebox
+
+            try:
+                mostrar_acerca_de(parent)
+            except Exception as e:
+                pytest.fail(f"mostrar_acerca_de con parent lanzó excepción: {e}")
 
     def test_mostrar_acerca_de_usa_version(self, app, qtbot):
         """Verifica que mostrar_acerca_de usa la versión del proyecto"""
         with patch('escuadra.ui.dialogo_acerca_de.QMessageBox') as MockQMessageBox:
             mock_messagebox = MagicMock()
             MockQMessageBox.about = mock_messagebox
-            
+
             mostrar_acerca_de()
-            
+
             mock_messagebox.assert_called_once()
             args = mock_messagebox.call_args[0]
             assert "Versión:" in args[2]
@@ -56,13 +64,13 @@ class TestDialogoAcercaDe:
         with patch('escuadra.ui.dialogo_acerca_de.QMessageBox') as MockQMessageBox:
             mock_messagebox = MagicMock()
             MockQMessageBox.about = mock_messagebox
-            
+
             mostrar_acerca_de()
-            
+
             mock_messagebox.assert_called_once()
             args = mock_messagebox.call_args[0]
             texto = args[2]
-            
+
             assert "Escuadra" in texto
             assert "Versión:" in texto
             assert "Licencia:" in texto
@@ -74,9 +82,9 @@ class TestDialogoAcercaDe:
         with patch('escuadra.ui.dialogo_acerca_de.QMessageBox') as MockQMessageBox:
             mock_messagebox = MagicMock()
             MockQMessageBox.about = mock_messagebox
-            
+
             mostrar_acerca_de()
-            
+
             mock_messagebox.assert_called_once()
             args = mock_messagebox.call_args[0]
             assert "Acerca de Escuadra" in args[1]

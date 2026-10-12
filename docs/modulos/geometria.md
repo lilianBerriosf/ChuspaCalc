@@ -40,6 +40,19 @@ El módulo de geometría proporciona funciones para calcular áreas, perímetros
 
 ---
 
+## Resolución de triángulos
+
+La herramienta **Resolución de triángulos** calcula los elementos faltantes de un triángulo usando la ley de cosenos y la ley de senos. Los ángulos se expresan en grados.
+
+| Caso conocido         | Función                                                 | Resultado               |
+| --------------------- | ------------------------------------------------------- | ----------------------- |
+| Los tres lados        | `resolver_triangulo_lados(a, b, c)`                     | Ángulos A, B y C        |
+| Un lado y dos ángulos | `resolver_triangulo_lado_angulo(a, angulo_a, angulo_b)` | Lados b y c, y ángulo C |
+
+Las funciones lanzan `ValueError` si los datos no forman un triángulo válido (lados no positivos, desigualdad triangular incumplida o ángulos que suman 180° o más).
+
+---
+
 ## Ejemplos de uso
 
 ### Cálculo de áreas
@@ -78,4 +91,21 @@ from escuadra.modulos.geometria.volumen import (
 
 print(volumen_cubo(3))
 print(volumen_esfera(2))
+```
+
+### Resolución de triángulos
+
+```python
+from escuadra.modulos.geometria.resolucion_triangulos import (
+    resolver_triangulo_lados,
+    resolver_triangulo_lado_angulo,
+)
+
+# Tres lados conocidos: devuelve los ángulos A, B y C
+print(resolver_triangulo_lados(3, 4, 5))
+# (36.87..., 53.13..., 90.0)
+
+# Un lado y dos ángulos: devuelve los lados b y c, y el ángulo C
+print(resolver_triangulo_lado_angulo(10, 30, 60))
+# (17.32..., 20.00..., 90)
 ```

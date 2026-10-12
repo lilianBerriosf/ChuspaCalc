@@ -21,7 +21,7 @@ from escuadra.modulos.geometria.resolucion_triangulos import (
 
 class HerramientaResolucionTriangulos(Herramienta):
     nombre = "Resolución de triángulos"
-    carrera = Carrera.MATEMATICAS
+    carrera = Carrera.GEOMETRIA
     descripcion = "Calcula triángulos usando ley de senos y cosenos."
 
     def crear_widget(self) -> QWidget:

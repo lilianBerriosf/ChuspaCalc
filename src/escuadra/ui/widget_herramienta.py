@@ -1,4 +1,3 @@
-import time
 import threading
 
 from PySide6.QtGui import QFont
@@ -17,7 +16,7 @@ class WidgetHerramienta(QWidget):
 
     def __init__(self, nombre, descripcion, parent=None):
         super().__init__(parent)
-        
+
         # Layout principal de la herramienta
         self.layout_principal = QVBoxLayout(self)
 
