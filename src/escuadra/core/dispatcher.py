@@ -3,9 +3,32 @@ Despachador de comandos que mapea subcomandos a herramientas
 consultando al registry real.
 """
 
-import sys
+from __future__ import annotations
 
-from escuadra.core import registry
+import sys
+from typing import Any
+
+from escuadra.core.registry import buscar_por_nombre
+
+def despacho(nombre: str) -> Any:
+    """Despacha un subcomando a su herramienta."""
+    herramienta_cls = buscar_por_nombre(nombre)
+
+    if herramienta_cls is None:
+        print(
+            f"Error: subcomando desconocido '{nombre}'",
+            file=sys.stderr,
+        )
+        return None
+
+    instancia = herramienta_cls()
+
+    if hasattr(instancia, "ejecutar"):
+        return instancia.ejecutar()
+    if hasattr(instancia, "run"):
+        return instancia.run()
+
+    return instancia
 
 def dispatch(subcommand: str) -> int:
     """
@@ -17,20 +40,18 @@ def dispatch(subcommand: str) -> int:
     Returns:
         Código de salida entero (0 para éxito, 1 para error).
     """
-    herramienta_cls = registry.buscar_por_nombre(subcommand)
+    result = despacho(subcommand)
 
-    if herramienta_cls is None:
-        print(
-            f"Error: subcomando desconocido '{subcommand}'",
-            file=sys.stderr,
-        )
+    if result is None:
         return 1
 
     try:
-        # Instanciamos la herramienta para validar que existe y es usable
-        instancia = herramienta_cls()
-        # Si tiene método de ejecución CLI, lo llamamos si existe
-        if hasattr(instancia, "ejecutar"):
+        if isinstance(result, int):
+            return result
+        return 0
+    except Exception as exc:
+        print(f"Error ejecutando '{subcommand}': {exc}", file=sys.stderr)
+        return 1    if hasattr(instancia, "ejecutar"):
            return instancia.ejecutar()
         elif hasattr(instancia, "run"):
             return instancia.run()
