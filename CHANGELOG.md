@@ -32,6 +32,7 @@ El script genera las entradas del changelog a partir de los commits desde el úl
 
 ### Fixed
 - fix(changelog): corrección de entradas faltantes del sprint actual
+- fix(centro/dispatcher): reescribir despacho() contra API real buscar_por_nombre, elimina MODULOS_DIR y get_tools inexistentes - Closes #1107
 
 ## [0.1.0] - 2026-04-19
 
