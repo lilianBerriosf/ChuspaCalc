@@ -5,9 +5,9 @@ Tests unitarios para el registry de herramientas.
 
 from PySide6.QtWidgets import QLabel, QWidget
 
-from escuadra.core.carrera import Carrera
-from escuadra.core.herramienta import Herramienta
-from escuadra.core.registry import (
+from chuspacalc.core.carrera import Carrera
+from chuspacalc.core.herramienta import Herramienta
+from chuspacalc.core.registry import (
     buscar_por_nombre,
     descubrir_herramientas,
     herramientas_por_carrera,
