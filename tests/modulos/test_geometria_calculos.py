@@ -8,13 +8,13 @@ Pruebas para módulos de geometría:
 import pytest
 import math
 
-from escuadra.modulos.geometria.calculo_area import (
+from chuspacalc.modulos.geometria.calculo_area import (
     area_triangulo,
     area_circulo,
     area_rectangulo
 )
 
-from escuadra.modulos.geometria.perimetro import (
+from chuspacalc.modulos.geometria.perimetro import (
     perimetro_circulo,
     perimetro_cuadrado,
     perimetro_rectangulo,
@@ -22,7 +22,7 @@ from escuadra.modulos.geometria.perimetro import (
     perimetro_hexagono_regular
 )
 
-from escuadra.modulos.geometria.volumen import (
+from chuspacalc.modulos.geometria.volumen import (
     volumen_cubo,
     volumen_esfera,
     volumen_cilindro,
