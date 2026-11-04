@@ -29,6 +29,7 @@ def calcular_caida(
     seccion: float,
     material: str = "cobre",
     tension: float = TENSION_REFERENCIA_V,
+    factor_potencia: float = 1.0,
 ) -> dict[str, float | bool]:
     """Calcula la caida de tension en un conductor electrico.
 
@@ -43,7 +44,9 @@ def calcular_caida(
                    (por defecto) y ``'aluminio'``.
         tension:   Tension nominal de referencia en voltios (V). Debe ser > 0.
                    Por defecto 220.0.
-
+        factor_potencia: Factor de potencia (cos phi) de la carga. Debe estar
+                   en el intervalo [0.0, 1.0]. Por defecto 1.0, que equivale
+                   a la formula sin factor de potencia.
     Returns:
         Diccionario con los siguientes campos:
 
@@ -56,6 +59,7 @@ def calcular_caida(
     Raises:
         ValueError: Si ``material`` no esta entre los reconocidos.
         ValueError: Si alguno de los parametros numericos no es positivo.
+        ValueError: Si ``factor_potencia`` no pertenece al intervalo [0.0, 1.0].
 
     Examples:
         >>> calcular_caida(longitud=100, corriente=15, seccion=4)
@@ -82,9 +86,14 @@ def calcular_caida(
             raise ValueError(
                 f"El parametro '{nombre}' debe ser positivo. " f"Se recibio: {valor}."
             )
+    if not 0.0 <= factor_potencia <= 1.0:
+        raise ValueError(
+            "El factor de potencia debe pertenecer al intervalo [0.0, 1.0]. "
+            f"Se recibio: {factor_potencia}."
+        )
 
     resistividad = RESISTIVIDADES[material_lower]
-    caida_v = 2 * resistividad * longitud * corriente / seccion
+    caida_v = 2 * resistividad * longitud * corriente * factor_potencia / seccion
     porcentaje = (caida_v / tension) * 100
     admisible = porcentaje <= PORCENTAJE_ADMISIBLE
 
