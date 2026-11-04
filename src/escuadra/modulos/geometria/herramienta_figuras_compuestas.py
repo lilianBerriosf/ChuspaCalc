@@ -1,11 +1,11 @@
 """
-Herramienta de Figuras Compuestas para Escuadra.
+Herramienta de Figuras Compuestas para ChuspaCalc.
 """
 from PySide6.QtWidgets import (
     QHBoxLayout, QLabel, QLineEdit, QPushButton, QVBoxLayout, QWidget, QTextEdit
 )
-from escuadra.core.carrera import Carrera
-from escuadra.core.herramienta import Herramienta
+from chuspacalc.core.carrera import Carrera
+from chuspacalc.core.herramienta import Herramienta
 from.figuras_compuestas import calcular_area_compuesta, calcular_volumen_compuesto
 
 class HerramientaFigurasCompuestas(Herramienta):
