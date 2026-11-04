@@ -8,13 +8,12 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from escuadra.core.carrera import Carrera
-from escuadra.core.herramienta import Herramienta
-from escuadra.modulos.sistemas.complemento_a_2 import (
+from chuspacalc.core.carrera import Carrera
+from chuspacalc.core.herramienta import Herramienta
+from chuspacalc.modulos.sistemas.complemento_a_2 import (
     complemento_a_decimal,
     decimal_a_complemento,
 )
-
 
 class HerramientaComplementoA2(Herramienta):
     nombre = "Complemento a 2"
