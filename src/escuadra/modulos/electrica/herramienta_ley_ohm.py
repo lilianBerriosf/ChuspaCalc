@@ -1,5 +1,5 @@
 """
-Herramienta de la Ley de Ohm para Escuadra.
+Herramienta de la Ley de Ohm para ChuspaCalc.
 
 Calcula voltaje, corriente o resistencia a partir de las otras dos
 magnitudes.
@@ -14,9 +14,9 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from escuadra.core.carrera import Carrera
-from escuadra.core.herramienta import Herramienta
-from escuadra.modulos.electrica.ley_ohm import calcular_ohm
+from chuspacalc.core.carrera import Carrera
+from chuspacalc.core.herramienta import Herramienta
+from chuspacalc.modulos.electrica.ley_ohm import calcular_ohm
 
 
 def calcular_potencia(voltaje: float, corriente: float) -> float:
