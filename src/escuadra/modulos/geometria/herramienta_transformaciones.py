@@ -9,9 +9,9 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from escuadra.core.carrera import Carrera
-from escuadra.core.herramienta import Herramienta
-from escuadra.modulos.geometria.transformaciones import (
+from chuspacalc.core.carrera import Carrera
+from chuspacalc.core.herramienta import Herramienta
+from chuspacalc.modulos.geometria.transformaciones import (
     escalar_punto,
     rotar_punto,
     trasladar_punto,
