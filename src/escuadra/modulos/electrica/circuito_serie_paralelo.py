@@ -1,6 +1,20 @@
 """Cálculo de resistencia equivalente en serie y paralelo."""
 
 
+def _normalizar_resistencias(resistencias):
+    """Acepta ``f(r1, r2, ...)`` o ``f([r1, r2, ...])`` y valida los valores."""
+    if len(resistencias) == 1 and isinstance(resistencias[0], (list, tuple)):
+        resistencias = tuple(resistencias[0])
+
+    if len(resistencias) < 2:
+        raise ValueError("Se requieren al menos 2 resistencias")
+
+    if any(r <= 0 for r in resistencias):
+        raise ValueError("Todas las resistencias deben ser mayores que 0")
+
+    return resistencias
+
+
 def resistencia_serie(*resistencias):
     """
     Calcula la resistencia equivalente en serie.
@@ -8,12 +22,7 @@ def resistencia_serie(*resistencias):
     Fórmula:
         R_eq = R1 + R2 + ... + Rn
     """
-    if len(resistencias) < 2:
-        raise ValueError("Se requieren al menos 2 resistencias")
-
-    if any(r <= 0 for r in resistencias):
-        raise ValueError("Todas las resistencias deben ser mayores que 0")
-
+    resistencias = _normalizar_resistencias(resistencias)
     return float(sum(resistencias))
 
 
@@ -24,16 +33,10 @@ def resistencia_paralelo(*resistencias):
     Fórmula:
         1 / R_eq = 1/R1 + 1/R2 + ... + 1/Rn
     """
-    if len(resistencias) < 2:
-        raise ValueError("Se requieren al menos 2 resistencias")
-
-    if any(r <= 0 for r in resistencias):
-        raise ValueError("Todas las resistencias deben ser mayores que 0")
-
+    resistencias = _normalizar_resistencias(resistencias)
     suma_inversas = sum(1 / r for r in resistencias)
 
     return float(1 / suma_inversas)
-
 
 
 def capacitancia_paralelo(*capacitancias):
