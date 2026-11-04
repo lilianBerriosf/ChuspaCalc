@@ -28,3 +28,46 @@ def calcular_voltaje_carga_capacitor(
         raise ValueError("El tiempo no puede ser negativo")
 
     return voltaje_fuente * (1 - math.exp(-tiempo / constante_tiempo))
+
+
+def analisis_transitorio(
+    tipo: str,
+    resistencia: float,
+    componente: float,
+    tension: float
+) -> dict:
+    """
+    Calcula la constante de tiempo y la energía almacenada de un circuito RC o RL.
+
+    Para un circuito RC (componente = capacitancia en F):
+        tau = R * C
+        energia = 0.5 * C * V^2
+
+    Para un circuito RL (componente = inductancia en H):
+        tau = L / R
+        energia = 0.5 * L * I^2, con I = V / R (corriente en estado estacionario)
+
+    Returns:
+        Diccionario con ``tau`` (s), ``energia_joules`` (J) y
+        ``tiempo_estable`` (5 * tau, en s).
+
+    Raises:
+        ValueError: Si ``tipo`` no es 'RC' ni 'RL', o si ``resistencia`` o
+            ``componente`` no son mayores que 0.
+    """
+    if tipo not in ("RC", "RL"):
+        raise ValueError("El tipo de circuito debe ser 'RC' o 'RL'")
+
+    if tipo == "RC":
+        tau = calcular_constante_tiempo_rc(resistencia, componente)
+        energia = 0.5 * componente * tension ** 2
+    else:
+        tau = calcular_constante_tiempo_rl(resistencia, componente)
+        corriente = tension / resistencia
+        energia = 0.5 * componente * corriente ** 2
+
+    return {
+        "tau": tau,
+        "energia_joules": energia,
+        "tiempo_estable": 5 * tau,
+    }
