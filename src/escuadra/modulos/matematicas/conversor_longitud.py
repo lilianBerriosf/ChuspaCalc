@@ -1,4 +1,4 @@
-from escuadra.modulos.matematicas.error_validacion import ErrorValidacion
+from chuspacalc.modulos.matematicas.error_validacion import ErrorValidacion
 
 UNIDADES_A_METROS = {
     "m": 1,
