@@ -3,7 +3,7 @@ Pruebas para el módulo historial.py
 """
 
 
-from escuadra.core.historial import Historial
+from chuspacalc.core.historial import Historial
 
 
 class TestHistorial:
