@@ -1,5 +1,5 @@
 """
-Herramienta de resolución de sistemas de ecuaciones lineales para Chuspacalc.
+Herramienta de resolución de sistemas de ecuaciones lineales para ChuspaCalc.
 Resuelve sistemas A·x = b usando eliminación gaussiana con pivoteo parcial.
 """
 
