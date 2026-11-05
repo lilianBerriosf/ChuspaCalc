@@ -6,9 +6,9 @@ import math
 
 import pytest
 
-from escuadra.modulos.matematicas.conversor_angulo import convertir_angulo
-from escuadra.modulos.matematicas.conversor_energia import convertir_energia
-from escuadra.modulos.matematicas.conversor_velocidad import convertir_velocidad
+from chuspacalc.modulos.matematicas.conversor_angulo import convertir_angulo
+from chuspacalc.modulos.matematicas.conversor_energia import convertir_energia
+from chuspacalc.modulos.matematicas.conversor_velocidad import convertir_velocidad
 
 
 # ------------------------
