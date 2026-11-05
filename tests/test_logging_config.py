@@ -1,12 +1,12 @@
 import logging
 
-from escuadra.utils.logging_config import configurar_logging, obtener_logger
+from chuspacalc.utils.logging_config import configurar_logging, obtener_logger
 
 
 def test_configurar_logging_debug():
     configurar_logging("DEBUG")
 
-    logger = logging.getLogger("escuadra")
+    logger = logging.getLogger("chuspacalc")
 
     assert logger.level == logging.DEBUG
 
@@ -14,13 +14,13 @@ def test_configurar_logging_debug():
 def test_configurar_logging_nivel_invalido():
     configurar_logging("XYZ")
 
-    logger = logging.getLogger("escuadra")
+    logger = logging.getLogger("chuspacalc")
 
     assert logger.level == logging.INFO
 
 
 def test_configurar_logging_no_duplica_handlers():
-    logger = logging.getLogger("escuadra")
+    logger = logging.getLogger("chuspacalc")
 
     antes = len(logger.handlers)
 
@@ -31,7 +31,7 @@ def test_configurar_logging_no_duplica_handlers():
 
 
 def test_configurar_logging_formato_handler():
-    logger = logging.getLogger("escuadra")
+    logger = logging.getLogger("chuspacalc")
 
     if not logger.handlers:
         configurar_logging("INFO")
@@ -45,6 +45,6 @@ def test_configurar_logging_formato_handler():
 
 
 def test_obtener_logger_devuelve_mismo_logger():
-    logger = obtener_logger("escuadra.prueba")
+    logger = obtener_logger("chuspacalc.prueba")
 
-    assert logger is logging.getLogger("escuadra.prueba")
+    assert logger is logging.getLogger("chuspacalc.prueba")
