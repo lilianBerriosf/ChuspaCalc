@@ -1,5 +1,5 @@
 """
-Herramienta de conversión de bases numéricas para Escuadra.
+Herramienta de conversión de bases numéricas para ChuspaCalc.
 Convierte entre decimal, binario, octal y hexadecimal.
 """
 
@@ -12,8 +12,8 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from escuadra.core.carrera import Carrera
-from escuadra.core.herramienta import Herramienta
+from chuspacalc.core.carrera import Carrera
+from chuspacalc.core.herramienta import Herramienta
 
 # Logica de conversion
 
