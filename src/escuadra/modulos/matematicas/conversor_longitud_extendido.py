@@ -1,4 +1,4 @@
-from escuadra.modulos.matematicas.conversor_longitud import UNIDADES_A_METROS as UNIDADES_BASE
+from chuspacalc.modulos.matematicas.conversor_longitud import UNIDADES_A_METROS as UNIDADES_BASE
 
 UNIDADES_A_METROS = {
     **UNIDADES_BASE,
