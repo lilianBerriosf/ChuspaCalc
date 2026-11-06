@@ -1,6 +1,6 @@
 
 """
-Herramienta de matemática financiera para Escuadra.
+Herramienta de matemática financiera para ChuspaCalc.
 
 Calcula valor futuro, valor presente e interés compuesto.
 """
@@ -17,9 +17,9 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from escuadra.core.carrera import Carrera
-from escuadra.core.herramienta import Herramienta
-from escuadra.modulos.matematicas.financiera import (
+from chuspacalc.core.carrera import Carrera
+from chuspacalc.core.herramienta import Herramienta
+from chuspacalc.modulos.matematicas.financiera import (
     calcular_interes_compuesto,
     calcular_valor_futuro,
     calcular_valor_presente,
