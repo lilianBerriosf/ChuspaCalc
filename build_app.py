@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
 """
-Script para compilar Escuadra con PyInstaller
+Script para compilar ChuspaCalc con PyInstaller
 Ejecutar: python build_app.py
 """
 
 import subprocess
 import sys
 
+
 def main():
-    print("🚀 Compilando Escuadra con PyInstaller...")
+    print("🚀 Compilando ChuspaCalc con PyInstaller...")
     result = subprocess.run(
-        [sys.executable, "-m", "PyInstaller", "escuadra.spec"],
-        capture_output=False
+        [sys.executable, "-m", "PyInstaller", "chuspacalc.spec"], capture_output=False
     )
     if result.returncode == 0:
         print("✅ ¡Compilación exitosa!")
@@ -19,6 +19,7 @@ def main():
     else:
         print("❌ Error en la compilación")
         sys.exit(1)
+
 
 if __name__ == "__main__":
     main()
