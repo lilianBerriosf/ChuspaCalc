@@ -1,5 +1,5 @@
 """
-Herramienta de resolución de sistemas de ecuaciones lineales para Escuadra.
+Herramienta de resolución de sistemas de ecuaciones lineales para ChuspaCalc.
 Resuelve sistemas A·x = b usando eliminación gaussiana con pivoteo parcial.
 """
 
@@ -14,9 +14,9 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from escuadra.core.carrera import Carrera
-from escuadra.core.herramienta import Herramienta
-from escuadra.math.sistemas_lineales_nxn import resolver_sistema
+from chuspacalc.core.carrera import Carrera
+from chuspacalc.core.herramienta import Herramienta
+from chuspacalc.math.sistemas_lineales_nxn import resolver_sistema
 
 # ── Widget ───────────────────────────────────────────────────────────────────
 
