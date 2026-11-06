@@ -1,12 +1,21 @@
 import math
 
 
-def convertir_angulo(valor: float,
-                     unidad_origen: str,
-                     unidad_destino: str) -> float:
+def _validar_numero_finito(valor: float) -> float:
+    try:
+        if not math.isfinite(valor):
+            raise ValueError("El valor debe ser un número finito")
+    except TypeError as error:
+        raise ValueError("El valor debe ser un número finito") from error
+    return valor
+
+
+def convertir_angulo(valor: float, unidad_origen: str, unidad_destino: str) -> float:
     """
     Convierte ángulos entre grados, radianes y gradianes.
     """
+
+    _validar_numero_finito(valor)
 
     unidad_origen = unidad_origen.lower()
     unidad_destino = unidad_destino.lower()
@@ -50,6 +59,7 @@ def grados_a_radianes(grados: float) -> float:
     """
     Convierte grados a radianes.
     """
+    _validar_numero_finito(grados)
     return math.radians(grados)
 
 
@@ -57,4 +67,23 @@ def radianes_a_grados(rad: float) -> float:
     """
     Convierte radianes a grados.
     """
+    _validar_numero_finito(rad)
     return math.degrees(rad)
+
+
+def grados_a_dms(grados: float) -> tuple[int, int, float]:
+    """
+    Convierte grados decimales a grados, minutos y segundos.
+    """
+    _validar_numero_finito(grados)
+    signo = -1 if grados < 0 else 1
+    valor_absoluto = abs(grados)
+    grados_enteros = int(valor_absoluto)
+    resto = (valor_absoluto - grados_enteros) * 60
+    minutos = int(resto)
+    segundos = (resto - minutos) * 60
+    return (
+        signo * grados_enteros,
+        signo * minutos,
+        signo * segundos,
+    )
