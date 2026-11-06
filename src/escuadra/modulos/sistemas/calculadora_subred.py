@@ -1,7 +1,7 @@
 import ipaddress
 
 
-class ErrorCIDR(Exception):
+class ErrorCIDR(ValueError):
     pass
 
 
@@ -25,8 +25,21 @@ def calcular_subred(ip: str, prefijo_cidr: str) -> dict:
     except ValueError:
         raise ErrorCIDR("El prefijo CIDR debe ser un número entero")
 
-    if prefijo < 0 or prefijo > 32:
-        raise ErrorCIDR("El prefijo CIDR debe estar entre 0 y 32")
+    if prefijo < 1 or prefijo > 32:
+        raise ErrorCIDR("El prefijo CIDR debe estar entre 1 y 32")
+
+    octetos = ip.split(".")
+    if len(octetos) != 4:
+        raise ErrorCIDR("La dirección IP debe tener cuatro octetos")
+
+    for octeto in octetos:
+        try:
+            valor = int(octeto)
+        except ValueError:
+            raise ErrorCIDR("Cada octeto de la IP debe ser un número entero")
+
+        if valor < 0 or valor > 255:
+            raise ErrorCIDR("Cada octeto de la IP debe estar entre 0 y 255")
 
     try:
         red = ipaddress.ip_network(f"{ip}/{prefijo}", strict=False)
@@ -57,4 +70,3 @@ def calcular_subred(ip: str, prefijo_cidr: str) -> dict:
         "ultimo_host": ultimo_host,
         "total_hosts": total_hosts,
     }
-    
