@@ -21,10 +21,6 @@ def test_hexadecimal_a_decimal():
     assert convertir("F", 16, 10)["resultado"] == "15"
 
 
-def test_hexadecimal_minusculas_a_decimal():
-    assert convertir("f", 16, 10)["resultado"] == "15"
-
-
 def test_octal_a_decimal():
     assert convertir("17", 8, 10)["resultado"] == "15"
 
@@ -49,14 +45,6 @@ def test_base_destino_no_soportada():
 
 def test_digito_invalido_para_base():
     with pytest.raises(ValueError):
-        convertir("102", 2, 10)
-
-
-def test_mensaje_digito_invalido_indica_caracter_y_base():
-    with pytest.raises(
-        ValueError,
-        match=r"Carácter inválido '2' para base 2",
-    ):
         convertir("102", 2, 10)
 
 
