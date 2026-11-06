@@ -7,7 +7,7 @@ Tests unitarios para módulos avanzados de civil:
 
 import pytest
 
-from escuadra.modulos.civil.area_seccion import (
+from chuspacalc.modulos.civil.area_seccion import (
     area_rectangular,
     area_circular,
     area_circular_hueca,
@@ -15,11 +15,11 @@ from escuadra.modulos.civil.area_seccion import (
     area_perfil_t,
 )
 
-from escuadra.modulos.civil.deflexion_viga import (
+from chuspacalc.modulos.civil.deflexion_viga import (
     calcular_deflexion_max,
 )
 
-from escuadra.modulos.civil.momento_flector import (
+from chuspacalc.modulos.civil.momento_flector import (
     calcular_momento_max,
 )
 
