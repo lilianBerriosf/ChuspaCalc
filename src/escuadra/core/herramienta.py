@@ -23,6 +23,7 @@ class Herramienta(ABC):
     nombre: str = ""
     carrera: Carrera | None = None
     descripcion: str = ""
+    parametros_requeridos: tuple[str, ...] = ()
 
     def __init_subclass__(cls, **kwargs):
         """
@@ -67,3 +68,19 @@ class Herramienta(ABC):
             "carrera": cls.carrera,
             "descripcion": cls.descripcion,
         }
+
+    def validar_parametros(self, kwargs: dict) -> None:
+        """
+        Valida los parámetros recibidos contra `parametros_requeridos`.
+
+        Revisa que cada parámetro requerido esté presente en `kwargs`
+        y que su valor no sea None.
+
+        Raises:
+            ValueError: Si falta un parámetro requerido o su valor es None.
+        """
+        for nombre in self.parametros_requeridos:
+            if nombre not in kwargs:
+                raise ValueError(f"Falta el parámetro requerido '{nombre}'.")
+            if kwargs[nombre] is None:
+                raise ValueError(f"El parámetro '{nombre}' no puede ser None.")
