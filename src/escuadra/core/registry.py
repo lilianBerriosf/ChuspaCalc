@@ -17,6 +17,8 @@ logger = logging.getLogger(__name__)
 
 _cache: list[type[Herramienta]] | None = None
 
+_registros: dict[str, dict[str, str]] = {}
+
 
 def descubrir_herramientas() -> list[type[Herramienta]]:
     """
@@ -98,6 +100,48 @@ def buscar_por_nombre(nombre: str) -> type[Herramienta] | None:
         if herramienta.nombre == nombre:
             return herramienta
     return None
+
+
+def registrar(herramienta: type[Herramienta], metadata: dict[str, str]) -> None:
+    """
+    Valida y registra los metadatos de una herramienta.
+
+    Args:
+        herramienta: Clase de la herramienta a registrar.
+        metadata: Diccionario con las claves 'categoria' y 'descripcion'.
+
+    Raises:
+        ValueError: Si 'categoria' o 'descripcion' faltan o están vacías.
+    """
+    categoria = metadata.get("categoria")
+    descripcion = metadata.get("descripcion")
+
+    if not categoria or not str(categoria).strip():
+        raise ValueError("La metadata debe contener una 'categoria' no vacía.")
+    if not descripcion or not str(descripcion).strip():
+        raise ValueError("La metadata debe contener una 'descripcion' no vacía.")
+
+    _registros[herramienta.nombre] = {
+        "categoria": str(categoria).strip(),
+        "descripcion": str(descripcion).strip(),
+    }
+
+
+def obtener_por_categoria(categoria: str) -> list[type[Herramienta]]:
+    """
+    Devuelve las herramientas registradas de la categoría solicitada.
+
+    Args:
+        categoria: Categoría técnica de la herramienta.
+
+    Returns:
+        Lista de herramientas de la especialidad, o lista vacía si no hay.
+    """
+    return [
+        herramienta
+        for herramienta in descubrir_herramientas()
+        if herramienta.carrera is not None and herramienta.carrera.codigo == categoria
+    ]
 
 
 def limpiar_cache() -> None:
