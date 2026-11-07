@@ -8,11 +8,10 @@ licencia, créditos y documentación.
 
 from __future__ import annotations
 
+from chuspacalc import __version__
+from chuspacalc.core.carrera import Carrera
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QLabel, QMessageBox, QWidget
-
-from escuadra import __version__
-from escuadra.core.carrera import Carrera
 
 DOCUMENTACION_URL = (
     "https://github.com/sis-inf/ChuspaCalc/blob/main/docs/indice-general.md"
