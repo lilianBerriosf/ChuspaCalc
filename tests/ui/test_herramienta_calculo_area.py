@@ -1,8 +1,6 @@
 import chuspacalc.core.carrera as carrera
 import chuspacalc.modulos.geometria.calculo_area as calculo_area
-
 from PySide6.QtCore import Qt
-
 
 # Dependencias pendientes del módulo de geometría.
 # Se agregan temporalmente para permitir probar el widget hasta que

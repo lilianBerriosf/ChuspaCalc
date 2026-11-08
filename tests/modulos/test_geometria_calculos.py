@@ -5,29 +5,23 @@ Pruebas para módulos de geometría:
 - volumen.py
 """
 
-import pytest
 import math
 
-from chuspacalc.modulos.geometria.calculo_area import (
-    area_triangulo,
-    area_circulo,
-    area_rectangulo
-)
-
+import pytest
+from chuspacalc.modulos.geometria.calculo_area import area_circulo, area_rectangulo, area_triangulo
 from chuspacalc.modulos.geometria.perimetro import (
     perimetro_circulo,
     perimetro_cuadrado,
+    perimetro_hexagono_regular,
     perimetro_rectangulo,
     perimetro_triangulo,
-    perimetro_hexagono_regular
 )
-
 from chuspacalc.modulos.geometria.volumen import (
-    volumen_cubo,
-    volumen_esfera,
     volumen_cilindro,
     volumen_cono,
-    volumen_paralelepipedo
+    volumen_cubo,
+    volumen_esfera,
+    volumen_paralelepipedo,
 )
 
 

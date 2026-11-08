@@ -1,3 +1,5 @@
+from chuspacalc.core.carrera import Carrera
+from chuspacalc.core.herramienta import Herramienta
 from PySide6.QtWidgets import (
     QHBoxLayout,
     QLabel,
@@ -9,9 +11,6 @@ from PySide6.QtWidgets import (
     QVBoxLayout,
     QWidget,
 )
-
-from chuspacalc.core.carrera import Carrera
-from chuspacalc.core.herramienta import Herramienta
 
 
 class HerramientaKarnaugh(Herramienta):

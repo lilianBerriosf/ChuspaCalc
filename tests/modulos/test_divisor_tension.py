@@ -3,7 +3,6 @@ Tests unitarios para las funciones de cálculo del divisor de tensión.
 """
 
 import pytest
-
 from chuspacalc.modulos.electrica.herramienta_divisor_tension import (
     calcular_r1,
     calcular_r2,

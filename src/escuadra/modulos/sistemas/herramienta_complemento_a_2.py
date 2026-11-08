@@ -1,3 +1,9 @@
+from chuspacalc.core.carrera import Carrera
+from chuspacalc.core.herramienta import Herramienta
+from chuspacalc.modulos.sistemas.complemento_a_2 import (
+    complemento_a_decimal,
+    decimal_a_complemento,
+)
 from PySide6.QtWidgets import (
     QComboBox,
     QHBoxLayout,
@@ -8,12 +14,6 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from chuspacalc.core.carrera import Carrera
-from chuspacalc.core.herramienta import Herramienta
-from chuspacalc.modulos.sistemas.complemento_a_2 import (
-    complemento_a_decimal,
-    decimal_a_complemento,
-)
 
 class HerramientaComplementoA2(Herramienta):
     nombre = "Complemento a 2"

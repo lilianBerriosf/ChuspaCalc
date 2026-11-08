@@ -3,6 +3,9 @@ Herramienta de resolución de sistemas de ecuaciones lineales para ChuspaCalc.
 Resuelve sistemas A·x = b usando eliminación gaussiana con pivoteo parcial.
 """
 
+from chuspacalc.core.carrera import Carrera
+from chuspacalc.core.herramienta import Herramienta
+from chuspacalc.math.sistemas_lineales_nxn import resolver_sistema
 from PySide6.QtWidgets import (
     QGridLayout,
     QHBoxLayout,
@@ -13,10 +16,6 @@ from PySide6.QtWidgets import (
     QVBoxLayout,
     QWidget,
 )
-
-from chuspacalc.core.carrera import Carrera
-from chuspacalc.core.herramienta import Herramienta
-from chuspacalc.math.sistemas_lineales_nxn import resolver_sistema
 
 # ── Widget ───────────────────────────────────────────────────────────────────
 

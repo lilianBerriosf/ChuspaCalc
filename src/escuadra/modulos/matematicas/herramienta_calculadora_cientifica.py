@@ -1,9 +1,8 @@
 import math
 
-from PySide6.QtWidgets import QWidget
-
 from chuspacalc.core.carrera import Carrera
 from chuspacalc.core.herramienta import Herramienta
+from PySide6.QtWidgets import QWidget
 
 
 class HerramientaCalculadoraCientifica(Herramienta):

@@ -5,11 +5,9 @@ Tests unitarios para los conversores físicos de energía, velocidad y ángulo.
 import math
 
 import pytest
-
 from chuspacalc.modulos.matematicas.conversor_angulo import convertir_angulo
 from chuspacalc.modulos.matematicas.conversor_energia import convertir_energia
 from chuspacalc.modulos.matematicas.conversor_velocidad import convertir_velocidad
-
 
 # ------------------------
 # Conversor de energía

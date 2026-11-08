@@ -4,9 +4,8 @@ Clase base abstracta para todas las herramientas del sistema.
 
 from abc import ABC, abstractmethod
 
-from PySide6.QtWidgets import QWidget
-
 from chuspacalc.core.carrera import Carrera
+from PySide6.QtWidgets import QWidget
 
 
 class Herramienta(ABC):

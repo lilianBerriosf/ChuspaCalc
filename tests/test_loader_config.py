@@ -2,11 +2,11 @@
 Pruebas para el módulo config/loader.py
 """
 
-import pytest
-import yaml
 import os
 import tempfile
 
+import pytest
+import yaml
 from chuspacalc.config.loader import load
 
 

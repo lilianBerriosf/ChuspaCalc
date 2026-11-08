@@ -4,13 +4,13 @@ Pruebas para los módulos io:
 - exportador_json.py
 """
 
-import pytest
 import json
 import os
 import tempfile
 
+import pytest
 from chuspacalc.io.csv_parser import parse_csv
-from chuspacalc.io.exportador_json import exportar_resultado, exportar_lista
+from chuspacalc.io.exportador_json import exportar_lista, exportar_resultado
 
 
 class TestCSVParser:

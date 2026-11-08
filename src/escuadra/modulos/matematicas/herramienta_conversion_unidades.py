@@ -1,7 +1,6 @@
-from PySide6.QtWidgets import QComboBox, QHBoxLayout, QLabel, QLineEdit, QVBoxLayout, QWidget
-
 from chuspacalc.core.carrera import Carrera
 from chuspacalc.core.herramienta import Herramienta
+from PySide6.QtWidgets import QComboBox, QHBoxLayout, QLabel, QLineEdit, QVBoxLayout, QWidget
 
 
 class HerramientaConversionUnidades(Herramienta):

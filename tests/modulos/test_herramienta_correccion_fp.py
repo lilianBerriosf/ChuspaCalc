@@ -1,10 +1,10 @@
 import pytest
 
-from escuadra.modulos.electrica.herramienta_correccion_fp import (
-    herramienta_correccion_fp,
-)
 from escuadra.modulos.electrica.correccion_fp import (
     calcular_capacitancia_correccion,
+)
+from escuadra.modulos.electrica.herramienta_correccion_fp import (
+    herramienta_correccion_fp,
 )
 
 

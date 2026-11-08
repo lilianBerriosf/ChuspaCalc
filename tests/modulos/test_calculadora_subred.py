@@ -1,8 +1,8 @@
 import pytest
 
 from escuadra.modulos.sistemas.calculadora_subred import (
-    calcular_subred,
     ErrorCIDR,
+    calcular_subred,
 )
 
 
