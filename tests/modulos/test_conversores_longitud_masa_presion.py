@@ -4,15 +4,15 @@ Tests unitarios para los conversores de presión, masa y longitud.
 
 import pytest
 
-from escuadra.modulos.matematicas.conversor_longitud import (
+from chuspacalc.modulos.matematicas.conversor_longitud import (
     UNIDADES_A_METROS,
     convertir,
 )
-from escuadra.modulos.matematicas.conversor_masa import convertir_masa
-from escuadra.modulos.matematicas.conversor_presion import convertir_presion
+from chuspacalc.modulos.matematicas.conversor_masa import convertir_masa
+from chuspacalc.modulos.matematicas.conversor_presion import convertir_presion
 
 try:
-    from escuadra.modulos.matematicas.conversor_longitud_extendido import (
+    from chuspacalc.modulos.matematicas.conversor_longitud_extendido import (
         UNIDADES_BASE,
         convertir_longitud,
     )
@@ -85,7 +85,7 @@ def test_convertir_longitud_valor_negativo():
 
 @pytest.mark.skipif(
     not MODULO_DISPONIBLE,
-    reason="Bug conocido: conversor_longitud_extendido.py importa desde 'src.escuadra'.",
+    reason="Bug conocido: conversor_longitud_extendido.py importa desde 'src.chuspacalc'.",
 )
 def test_convertir_longitud_extendida_pc_a_al():
     assert convertir_longitud(1, "pc", "al") == pytest.approx(
@@ -95,7 +95,7 @@ def test_convertir_longitud_extendida_pc_a_al():
 
 @pytest.mark.skipif(
     not MODULO_DISPONIBLE,
-    reason="Bug conocido: conversor_longitud_extendido.py importa desde 'src.escuadra'.",
+    reason="Bug conocido: conversor_longitud_extendido.py importa desde 'src.chuspacalc'.",
 )
 def test_convertir_longitud_extendida_mn_a_m():
     assert convertir_longitud(1, "mn", "m") == pytest.approx(1852.0)
@@ -103,7 +103,7 @@ def test_convertir_longitud_extendida_mn_a_m():
 
 @pytest.mark.skipif(
     not MODULO_DISPONIBLE,
-    reason="Bug conocido: conversor_longitud_extendido.py importa desde 'src.escuadra'.",
+    reason="Bug conocido: conversor_longitud_extendido.py importa desde 'src.chuspacalc'.",
 )
 def test_unidades_base_importadas_correctamente():
     assert UNIDADES_BASE is UNIDADES_A_METROS
