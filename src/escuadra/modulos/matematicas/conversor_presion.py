@@ -1,3 +1,6 @@
+import math
+
+
 def convertir_presion(valor, unidad_origen, unidad_destino):
     """Convierte un valor de presión entre unidades, usando Pa como base.
 
@@ -12,8 +15,12 @@ def convertir_presion(valor, unidad_origen, unidad_destino):
         float: Valor convertido a la unidad de destino.
 
     Raises:
-        ValueError: Si el valor es negativo o alguna unidad es desconocida.
+        ValueError: Si el valor no es finito, es negativo o alguna unidad es
+            desconocida.
     """
+    if not math.isfinite(valor):
+        raise ValueError(f"El valor de entrada debe ser finito: {valor}")
+
     if valor < 0:
         raise ValueError("El valor debe ser mayor o igual a 0")
 
@@ -31,14 +38,12 @@ def convertir_presion(valor, unidad_origen, unidad_destino):
 
     if unidad_origen not in factores:
         raise ValueError(
-            f"Unidad desconocida: {unidad_origen}. "
-            f"Unidades válidas: {list(factores.keys())}"
+            f"Unidad desconocida: {unidad_origen}. Unidades válidas: {list(factores.keys())}"
         )
 
     if unidad_destino not in factores:
         raise ValueError(
-            f"Unidad desconocida: {unidad_destino}. "
-            f"Unidades válidas: {list(factores.keys())}"
+            f"Unidad desconocida: {unidad_destino}. Unidades válidas: {list(factores.keys())}"
         )
 
     valor_pa = valor * factores[unidad_origen]

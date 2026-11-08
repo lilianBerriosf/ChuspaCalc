@@ -1,3 +1,5 @@
+import math
+
 from chuspacalc.modulos.matematicas.error_validacion import ErrorValidacion
 
 UNIDADES_A_METROS = {
@@ -6,12 +8,11 @@ UNIDADES_A_METROS = {
     "mm": 0.001,
     "km": 1000,
     "in": 0.0254,
-    "ft": 0.3048
+    "ft": 0.3048,
 }
 
 
 def convertir(valor: float, de_unidad: str, a_unidad: str) -> dict:
-
     """
     Convierte unidades de longitud usando metros como base.
 
@@ -25,12 +26,15 @@ def convertir(valor: float, de_unidad: str, a_unidad: str) -> dict:
 
     Raises:
         ErrorValidacion: Si el valor es negativo.
-        ValueError: Si la unidad no existe.
+        ValueError: Si el valor no es finito o si la unidad no existe.
     """
+
+    if not math.isfinite(valor):
+        raise ValueError(f"El valor de entrada debe ser finito: {valor}")
 
     if valor < 0:
         raise ErrorValidacion(
-            f"La longitud no puede ser negativa (valor recibido: {valor})"
+            f"La longitud no puede ser negativa (valor recibido: {valor})",
         )
 
     de_unidad = de_unidad.strip().lower()
@@ -52,5 +56,5 @@ def convertir(valor: float, de_unidad: str, a_unidad: str) -> dict:
         "valor_original": valor,
         "unidad_original": de_unidad,
         "valor_convertido": valor_convertido,
-        "unidad_destino": a_unidad
+        "unidad_destino": a_unidad,
     }
