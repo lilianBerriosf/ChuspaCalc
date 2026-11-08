@@ -1,3 +1,13 @@
+import math
+
+
+def _validar_finitos(**parametros) -> None:
+    """Rechaza NaN e infinitos indicando el parámetro inválido."""
+    for nombre, valor in parametros.items():
+        if not math.isfinite(valor):
+            raise ValueError(f"{nombre} debe ser finito, se recibió: {valor}")
+
+
 def potencia_vi(voltaje, corriente) -> float:
     """
     Calcula la potencia eléctrica usando la fórmula P = V·I.
@@ -10,6 +20,8 @@ def potencia_vi(voltaje, corriente) -> float:
         - I: corriente en Amperes (A)
         - P: potencia en Watts (W)
     """
+    _validar_finitos(voltaje=voltaje, corriente=corriente)
+
     if voltaje <= 0:
         raise ValueError("voltaje debe ser mayor que 0")
 
@@ -31,13 +43,15 @@ def potencia_ir(corriente, resistencia) -> float:
         - R: resistencia en Ohms (Ω)
         - P: potencia en Watts (W)
     """
+    _validar_finitos(corriente=corriente, resistencia=resistencia)
+
     if corriente <= 0:
         raise ValueError("corriente debe ser mayor que 0")
 
     if resistencia <= 0:
         raise ValueError("resistencia debe ser mayor que 0")
 
-    return float((corriente ** 2) * resistencia)
+    return float((corriente**2) * resistencia)
 
 
 def potencia_vr(voltaje, resistencia) -> float:
@@ -52,10 +66,12 @@ def potencia_vr(voltaje, resistencia) -> float:
         - R: resistencia en Ohms (Ω)
         - P: potencia en Watts (W)
     """
+    _validar_finitos(voltaje=voltaje, resistencia=resistencia)
+
     if voltaje <= 0:
         raise ValueError("voltaje debe ser mayor que 0")
 
     if resistencia <= 0:
         raise ValueError("resistencia debe ser mayor que 0")
 
-    return float((voltaje ** 2) / resistencia)
+    return float((voltaje**2) / resistencia)
