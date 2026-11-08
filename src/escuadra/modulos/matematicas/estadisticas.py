@@ -1,13 +1,29 @@
-def calcular_media(datos: list) -> float:
+import math
+from numbers import Real
+
+
+def _validar_datos(datos: list) -> None:
     if not datos:
         raise ValueError("La lista no puede estar vacia")
+
+    for valor in datos:
+        if isinstance(valor, bool) or not isinstance(valor, Real):
+            raise ValueError("Todos los datos deben ser numeros reales")
+
+        if isinstance(valor, int):
+            continue
+
+        if not math.isfinite(valor):
+            raise ValueError("Todos los datos deben ser finitos")
+
+def calcular_media(datos: list) -> float:
+    _validar_datos(datos)
 
     return float(sum(datos) / len(datos))
 
 
 def calcular_mediana(datos: list) -> float:
-    if not datos:
-        raise ValueError("La lista no puede estar vacia")
+    _validar_datos(datos)
 
     datos_ordenados = sorted(datos)
     n = len(datos_ordenados)
@@ -22,8 +38,7 @@ def calcular_mediana(datos: list) -> float:
 
 
 def calcular_moda(datos: list) -> list:
-    if not datos:
-        raise ValueError("La lista no puede estar vacia")
+    _validar_datos(datos)
 
     frecuencias = {}
 
@@ -43,8 +58,7 @@ def calcular_desviacion_estandar(
     datos: list,
     poblacional: bool = False
 ) -> float:
-    if not datos:
-        raise ValueError("La lista no puede estar vacia")
+    _validar_datos(datos)
 
     n = len(datos)
 
