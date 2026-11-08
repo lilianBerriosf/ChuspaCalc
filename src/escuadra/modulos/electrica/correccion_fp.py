@@ -40,6 +40,17 @@ def calcular_capacitancia_correccion(
         Capacitancia en Faradios.
     """
 
+    parametros = {
+        "potencia_activa": potencia_activa,
+        "fp_actual": fp_actual,
+        "fp_deseado": fp_deseado,
+        "voltaje": voltaje,
+        "frecuencia": frecuencia,
+    }
+    for nombre, valor in parametros.items():
+        if not math.isfinite(valor):
+            raise ValueError(f"{nombre} debe ser finito, se recibió: {valor}")
+
     if not (0 < fp_actual <= 1):
         raise ValueError("fp_actual debe estar entre 0 y 1")
 
@@ -47,9 +58,7 @@ def calcular_capacitancia_correccion(
         raise ValueError("fp_deseado debe estar entre 0 y 1")
 
     if fp_deseado <= fp_actual:
-        raise ValueError(
-            "El factor de potencia deseado debe ser mayor al actual"
-        )
+        raise ValueError("El factor de potencia deseado debe ser mayor al actual")
 
     if potencia_activa <= 0:
         raise ValueError("La potencia debe ser positiva")
@@ -63,12 +72,11 @@ def calcular_capacitancia_correccion(
     theta_actual = math.acos(fp_actual)
     theta_deseado = math.acos(fp_deseado)
 
-    potencia_reactiva = potencia_activa * (
-        math.tan(theta_actual) - math.tan(theta_deseado)
-    )
+    diferencia = math.tan(theta_actual) - math.tan(theta_deseado)
+    potencia_reactiva = potencia_activa * diferencia
 
     omega = 2 * math.pi * frecuencia
 
-    capacitancia = potencia_reactiva / (omega * voltaje ** 2)
+    capacitancia = potencia_reactiva / (omega * voltaje**2)
 
     return capacitancia

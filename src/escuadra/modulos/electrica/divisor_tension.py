@@ -2,6 +2,15 @@
 Herramientas para cálculo de divisor de tensión resistivo.
 """
 
+import math
+
+
+def _validar_finitos(**parametros):
+    """Rechaza NaN e infinitos indicando el parámetro inválido."""
+    for nombre, valor in parametros.items():
+        if not math.isfinite(valor):
+            raise ValueError(f"{nombre} debe ser finito, se recibió: {valor}")
+
 
 def calcular_tension_salida(v_entrada, r1, r2):
     """
@@ -10,6 +19,8 @@ def calcular_tension_salida(v_entrada, r1, r2):
     Fórmula:
         Vout = Vin * R2 / (R1 + R2)
     """
+
+    _validar_finitos(v_entrada=v_entrada, r1=r1, r2=r2)
 
     if v_entrada <= 0:
         raise ValueError("v_entrada debe ser positiva")
@@ -34,6 +45,8 @@ def calcular_r2_para_tension(v_entrada, v_salida, r1):
     una tensión de salida deseada.
     """
 
+    _validar_finitos(v_entrada=v_entrada, v_salida=v_salida, r1=r1)
+
     if v_entrada <= 0:
         raise ValueError("v_entrada debe ser positiva")
 
@@ -41,9 +54,7 @@ def calcular_r2_para_tension(v_entrada, v_salida, r1):
         raise ValueError("r1 debe ser positiva")
 
     if v_salida <= 0 or v_salida >= v_entrada:
-        raise ValueError(
-            "v_salida debe ser positiva y menor que v_entrada"
-        )
+        raise ValueError("v_salida debe ser positiva y menor que v_entrada")
 
     r2 = (v_salida * r1) / (v_entrada - v_salida)
 
