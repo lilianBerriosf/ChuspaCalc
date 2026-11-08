@@ -81,3 +81,23 @@ def test_calcular_desviacion_estandar_con_lista_vacia_lanza_error():
 def test_funciones_estadisticas_rechazan_datos_invalidos(funcion, datos):
     with pytest.raises(ValueError):
         funcion(datos)
+
+
+def test_calcular_moda_acepta_enteros_grandes():
+    numero_grande = 10 ** 400
+
+    resultado = calcular_moda(
+        [numero_grande, numero_grande, 2]
+    )
+
+    assert resultado == [numero_grande]
+
+
+def test_calcular_desviacion_estandar_muestral():
+    datos = [1, 2, 3]
+
+    resultado = calcular_desviacion_estandar(
+        datos, poblacional=False
+    )
+
+    assert resultado == pytest.approx(1.0)

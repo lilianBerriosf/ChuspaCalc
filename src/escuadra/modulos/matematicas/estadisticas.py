@@ -10,11 +10,11 @@ def _validar_datos(datos: list) -> None:
         if isinstance(valor, bool) or not isinstance(valor, Real):
             raise ValueError("Todos los datos deben ser numeros reales")
 
-        try:
-            if not math.isfinite(valor):
-                raise ValueError("Todos los datos deben ser finitos")
-        except OverflowError as exc:
-            raise ValueError("Todos los datos deben ser finitos") from exc
+        if isinstance(valor, int):
+            continue
+
+        if not math.isfinite(valor):
+            raise ValueError("Todos los datos deben ser finitos")
 
 def calcular_media(datos: list) -> float:
     _validar_datos(datos)
