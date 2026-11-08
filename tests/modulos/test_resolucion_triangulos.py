@@ -4,6 +4,8 @@ verificando la resolución de triángulos a partir de sus tres lados o de
 un lado y dos ángulos, así como el manejo de datos inválidos.
 """
 
+import math
+
 import pytest
 
 from escuadra.modulos.geometria.resolucion_triangulos import (
@@ -54,3 +56,55 @@ def test_resolver_triangulo_lado_angulo_con_suma_180_lanza_error():
     # Dos ángulos que suman 180° no dejan ángulo para el tercer vértice
     with pytest.raises(ValueError):
         resolver_triangulo_lado_angulo(10, 100, 80)
+
+
+def test_resolver_triangulo_lado_angulo_lados_positivos_y_finitos():
+    b, c, _ = resolver_triangulo_lado_angulo(5, 45, 70)
+    assert b > 0 and c > 0
+    assert math.isfinite(b) and math.isfinite(c)
+
+
+@pytest.mark.parametrize("angulos", [(0, 60), (30, 0), (-30, 60), (30, -60)])
+def test_resolver_triangulo_lado_angulo_con_angulo_no_positivo_lanza_error(
+    angulos,
+):
+    with pytest.raises(ValueError):
+        resolver_triangulo_lado_angulo(10, *angulos)
+
+
+@pytest.mark.parametrize("angulos", [(180, 10), (10, 200)])
+def test_resolver_triangulo_lado_angulo_con_angulo_mayor_o_igual_180_lanza_error(
+    angulos,
+):
+    with pytest.raises(ValueError):
+        resolver_triangulo_lado_angulo(10, *angulos)
+
+
+def test_resolver_triangulo_lado_angulo_con_suma_mayor_180_lanza_error():
+    with pytest.raises(ValueError):
+        resolver_triangulo_lado_angulo(10, 120, 70)
+
+
+@pytest.mark.parametrize(
+    "args",
+    [
+        (math.nan, 30, 60),
+        (math.inf, 30, 60),
+        (10, math.nan, 60),
+        (10, 30, math.inf),
+        (10, -math.inf, 60),
+    ],
+)
+def test_resolver_triangulo_lado_angulo_con_valor_no_finito_lanza_error(args):
+    with pytest.raises(ValueError):
+        resolver_triangulo_lado_angulo(*args)
+
+
+def test_resolver_triangulo_lado_angulo_con_lado_negativo_lanza_error():
+    with pytest.raises(ValueError):
+        resolver_triangulo_lado_angulo(-5, 30, 60)
+
+
+def test_resolver_triangulo_lado_angulo_con_valor_no_numerico_lanza_error():
+    with pytest.raises(ValueError):
+        resolver_triangulo_lado_angulo(10, "30", 60)
