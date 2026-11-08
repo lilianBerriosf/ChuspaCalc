@@ -1,3 +1,5 @@
+import math
+
 import pytest
 
 from escuadra.modulos.electrica.potencia_trifasica import calcular_potencia_trifasica
@@ -41,10 +43,42 @@ def test_corriente_no_positiva_lanza_value_error(corriente_linea):
         calcular_potencia_trifasica(400, corriente_linea, 0.8)
 
 
-@pytest.mark.parametrize("factor_potencia", [0, -0.5, 1.1])
+@pytest.mark.parametrize("factor_potencia", [-0.5, 1.1, math.nan, math.inf, -math.inf])
 def test_factor_de_potencia_fuera_del_intervalo_lanza_value_error(factor_potencia):
     with pytest.raises(ValueError, match="factor_potencia debe estar entre 0 y 1"):
         calcular_potencia_trifasica(400, 10, factor_potencia)
+
+
+@pytest.mark.parametrize("voltaje_linea", [math.nan, math.inf, -math.inf])
+def test_voltaje_no_finito_lanza_value_error(voltaje_linea):
+    with pytest.raises(ValueError, match="voltaje_linea debe ser mayor que 0"):
+        calcular_potencia_trifasica(voltaje_linea, 10, 0.8)
+
+
+@pytest.mark.parametrize("corriente_linea", [math.nan, math.inf, -math.inf])
+def test_corriente_no_finita_lanza_value_error(corriente_linea):
+    with pytest.raises(ValueError, match="corriente_linea debe ser mayor que 0"):
+        calcular_potencia_trifasica(400, corriente_linea, 0.8)
+
+
+def test_factor_de_potencia_cero_da_activa_nula_y_reactiva_igual_a_aparente():
+    resultado = calcular_potencia_trifasica(400, 10, 0)
+    aparente = resultado["potencia_aparente"]
+
+    assert resultado["potencia_activa"] == pytest.approx(0.0, abs=1e-12)
+    assert resultado["potencia_reactiva"] == pytest.approx(aparente)
+
+
+@pytest.mark.parametrize("factor_potencia", [0, 0.3, 0.8, 1])
+def test_potencias_finitas_y_relaciones_esperadas(factor_potencia):
+    resultado = calcular_potencia_trifasica(400, 10, factor_potencia)
+    activa = resultado["potencia_activa"]
+    reactiva = resultado["potencia_reactiva"]
+    aparente = resultado["potencia_aparente"]
+
+    assert all(math.isfinite(valor) for valor in (activa, reactiva, aparente))
+    assert activa == pytest.approx(aparente * factor_potencia)
+    assert activa**2 + reactiva**2 == pytest.approx(aparente**2)
 
 
 def test_conexion_desconocida_lanza_value_error():
