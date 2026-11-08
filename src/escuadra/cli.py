@@ -9,7 +9,6 @@ import platform
 import sys
 
 import argcomplete
-
 from chuspacalc.cli_interactivo import ejecutar_interactivo
 from chuspacalc.core.registry import descubrir_herramientas, herramientas_por_carrera
 

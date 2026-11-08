@@ -3,6 +3,8 @@ Herramienta de conversión de unidades eléctricas para ChuspaCalc.
 Convierte entre unidades de potencia y energía.
 """
 
+from chuspacalc.core.carrera import Carrera
+from chuspacalc.core.herramienta import Herramienta
 from PySide6.QtWidgets import (
     QComboBox,
     QHBoxLayout,
@@ -12,9 +14,6 @@ from PySide6.QtWidgets import (
     QVBoxLayout,
     QWidget,
 )
-
-from chuspacalc.core.carrera import Carrera
-from chuspacalc.core.herramienta import Herramienta
 
 # Función pura de conversión
 

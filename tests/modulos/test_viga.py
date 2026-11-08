@@ -5,7 +5,6 @@ distribuidas, así como el manejo de entradas inválidas.
 """
 
 import pytest
-
 from chuspacalc.modulos.civil.viga import calcular_reacciones
 
 

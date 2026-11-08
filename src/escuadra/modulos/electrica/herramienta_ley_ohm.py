@@ -5,6 +5,9 @@ Calcula voltaje, corriente o resistencia a partir de las otras dos
 magnitudes.
 """
 
+from chuspacalc.core.carrera import Carrera
+from chuspacalc.core.herramienta import Herramienta
+from chuspacalc.modulos.electrica.ley_ohm import calcular_ohm
 from PySide6.QtWidgets import (
     QHBoxLayout,
     QLabel,
@@ -13,10 +16,6 @@ from PySide6.QtWidgets import (
     QVBoxLayout,
     QWidget,
 )
-
-from chuspacalc.core.carrera import Carrera
-from chuspacalc.core.herramienta import Herramienta
-from chuspacalc.modulos.electrica.ley_ohm import calcular_ohm
 
 
 def calcular_potencia(voltaje: float, corriente: float) -> float:

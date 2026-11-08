@@ -3,10 +3,9 @@ Tests unitarios para la clase base Herramienta.
 """
 
 import pytest
-from PySide6.QtWidgets import QLabel, QWidget
-
 from chuspacalc.core.carrera import Carrera
 from chuspacalc.core.herramienta import Herramienta
+from PySide6.QtWidgets import QLabel, QWidget
 
 
 # Subclase válida para pruebas

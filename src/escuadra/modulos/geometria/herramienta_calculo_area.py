@@ -1,3 +1,11 @@
+from chuspacalc.core.carrera import Carrera
+from chuspacalc.core.herramienta import Herramienta
+from chuspacalc.modulos.geometria.calculo_area import (
+    area_circulo,
+    area_rectangulo,
+    area_trapecio,
+    area_triangulo,
+)
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import (
     QComboBox,
@@ -9,15 +17,6 @@ from PySide6.QtWidgets import (
     QPushButton,
     QVBoxLayout,
     QWidget,
-)
-
-from chuspacalc.core.carrera import Carrera
-from chuspacalc.core.herramienta import Herramienta
-from chuspacalc.modulos.geometria.calculo_area import (
-    area_circulo,
-    area_rectangulo,
-    area_trapecio,
-    area_triangulo,
 )
 
 # Configuración de cada figura: nombre visible → (campos requeridos, función de cálculo)

@@ -1,3 +1,5 @@
+from chuspacalc.core.carrera import Carrera
+from chuspacalc.core.herramienta import Herramienta
 from PySide6.QtWidgets import (
     QComboBox,
     QLabel,
@@ -7,9 +9,6 @@ from PySide6.QtWidgets import (
     QVBoxLayout,
     QWidget,
 )
-
-from chuspacalc.core.carrera import Carrera
-from chuspacalc.core.herramienta import Herramienta
 
 
 def calcular_vout(vin: float, r1: float, r2: float) -> float:

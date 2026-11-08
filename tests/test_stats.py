@@ -1,7 +1,6 @@
 import math
 
 import pytest
-
 from chuspacalc.math.stats import (
     calcular_desviacion_estandar,
     calcular_media,

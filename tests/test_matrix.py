@@ -1,5 +1,4 @@
 import pytest
-
 from chuspacalc.math.matrix import multiplicar, restar, sumar
 
 

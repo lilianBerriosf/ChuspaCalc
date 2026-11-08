@@ -2,8 +2,8 @@ import json
 
 from escuadra.core.esquema_llm import (
     _tipo_json,
-    exportar_esquema_llm,
     exportar_esquema_json,
+    exportar_esquema_llm,
 )
 
 
