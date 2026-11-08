@@ -58,3 +58,26 @@ def test_calcular_moda_con_lista_vacia_lanza_error():
 def test_calcular_desviacion_estandar_con_lista_vacia_lanza_error():
     with pytest.raises(ValueError):
         calcular_desviacion_estandar([])
+
+
+@pytest.mark.parametrize(
+    "funcion",
+    [
+        calcular_media,
+        calcular_mediana,
+        calcular_moda,
+        calcular_desviacion_estandar,
+    ],
+)
+@pytest.mark.parametrize(
+    "datos",
+    [
+        [1, 2, float("nan")],
+        [1, 2, float("inf")],
+        [1, 2, float("-inf")],
+        [1, 2, "hola"],
+    ],
+)
+def test_funciones_estadisticas_rechazan_datos_invalidos(funcion, datos):
+    with pytest.raises(ValueError):
+        funcion(datos)
