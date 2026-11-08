@@ -3,12 +3,17 @@ Funciones de matemática financiera básica.
 """
 
 
+import math
+from numbers import Real
+
+
 def calcular_valor_futuro(valor_presente: float, tasa: float, periodos: int) -> float:
     """
     Calcula el valor futuro usando interés compuesto.
 
     VF = VP * (1 + i) ** n
     """
+    _validar_parametros(valor_presente, tasa, periodos)
     return valor_presente * (1 + tasa) ** periodos
 
 
@@ -18,6 +23,7 @@ def calcular_valor_presente(valor_futuro: float, tasa: float, periodos: int) -> 
 
     VP = VF / (1 + i) ** n
     """
+    _validar_parametros(valor_futuro, tasa, periodos)
     return valor_futuro / (1 + tasa) ** periodos
 
 
@@ -27,29 +33,28 @@ def calcular_interes_compuesto(capital: float, tasa: float, periodos: int) -> fl
 
     I = VF - Capital
     """
+    _validar_parametros(capital, tasa, periodos)
     valor_futuro = calcular_valor_futuro(capital, tasa, periodos)
     return valor_futuro - capital
 
 
 def _validar_parametros(capital: float, tasa: float, periodos: int) -> None:
-    """
-    Verifica que capital >= 0, tasa >= 0 y periodos > 0.
+    """Valida capital, tasa y periodos de las operaciones financieras."""
+    for nombre, valor in (("capital", capital), ("tasa", tasa)):
+        if isinstance(valor, bool) or not isinstance(valor, Real):
+            raise ValueError(f"{nombre} debe ser un numero real finito")
 
-    Raises:
-        ValueError: Si alguno de los valores es inválido (incluido NaN).
-    """
-    if not capital >= 0:
-        raise ValueError(
-            f"capital debe ser mayor o igual que 0. Se recibió: {capital}."
-        )
-    if not tasa >= 0:
-        raise ValueError(
-            f"tasa debe ser mayor o igual que 0. Se recibió: {tasa}."
-        )
-    if not periodos > 0:
-        raise ValueError(
-            f"periodos debe ser mayor que 0. Se recibió: {periodos}."
-        )
+        if not isinstance(valor, int) and not math.isfinite(valor):
+            raise ValueError(f"{nombre} debe ser un numero real finito")
+
+        if valor < 0:
+            raise ValueError(f"{nombre} debe ser mayor o igual que 0")
+
+    if isinstance(periodos, bool) or not isinstance(periodos, int):
+        raise ValueError("periodos debe ser un entero positivo")
+
+    if periodos <= 0:
+        raise ValueError("periodos debe ser mayor que 0")
 
 
 def calcular_interes_simple(capital: float, tasa: float, periodos: int) -> float:
