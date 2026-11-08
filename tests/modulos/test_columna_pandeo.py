@@ -50,3 +50,14 @@ def test_longitud_no_positiva_lanza_value_error(longitud):
 def test_condicion_apoyo_desconocida_lanza_value_error():
     with pytest.raises(ValueError, match="condicion_apoyo debe ser una de"):
         calcular_carga_critica_euler(200e9, 8e-6, 3, condicion_apoyo="desconocida")
+
+
+@pytest.mark.parametrize("no_finito", [float("nan"), float("inf"), float("-inf")])
+@pytest.mark.parametrize(
+    "parametro", ["modulo_elasticidad", "momento_inercia", "longitud"]
+)
+def test_parametro_no_finito_lanza_value_error(parametro, no_finito):
+    valores = {"modulo_elasticidad": 200e9, "momento_inercia": 8e-6, "longitud": 3}
+    valores[parametro] = no_finito
+    with pytest.raises(ValueError, match=f"{parametro} debe ser un número finito"):
+        calcular_carga_critica_euler(**valores)

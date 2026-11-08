@@ -37,6 +37,14 @@ def calcular_carga_critica_euler(
     Raises:
         ValueError: Si los parámetros no son válidos o la condición de apoyo no existe
     """
+    for nombre, valor in (
+        ("modulo_elasticidad", modulo_elasticidad),
+        ("momento_inercia", momento_inercia),
+        ("longitud", longitud),
+    ):
+        if not math.isfinite(valor):
+            raise ValueError(f"{nombre} debe ser un número finito")
+
     if modulo_elasticidad <= 0:
         raise ValueError("modulo_elasticidad debe ser mayor que 0")
 
