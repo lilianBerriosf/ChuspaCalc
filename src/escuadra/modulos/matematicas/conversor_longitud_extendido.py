@@ -1,14 +1,22 @@
-from chuspacalc.modulos.matematicas.conversor_longitud import UNIDADES_A_METROS as UNIDADES_BASE
+import math
+
+from chuspacalc.modulos.matematicas.conversor_longitud import (
+    UNIDADES_A_METROS as UNIDADES_BASE,
+)
 
 UNIDADES_A_METROS = {
     **UNIDADES_BASE,
     "ua": 1.496e11,
     "al": 9.461e15,
     "mn": 1852.0,
-    "pc": 3.086e16
+    "pc": 3.086e16,
 }
 
+
 def convertir_longitud(valor: float, unidad_origen: str, unidad_destino: str) -> float:
+    if not math.isfinite(valor):
+        raise ValueError(f"El valor de entrada debe ser finito: {valor}")
+
     if valor < 0:
         raise ValueError("El valor no puede ser negativo")
 
