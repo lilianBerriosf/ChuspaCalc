@@ -79,3 +79,31 @@ def test_calcular_volumen_compuesto_suma_y_resta():
 def test_lista_vacia_devuelve_cero():
     assert calcular_area_compuesta([]) == 0
     assert calcular_volumen_compuesto([]) == 0
+
+
+VALIDA = {"tipo": "cubo", "parametros": {"lado": 2}}
+CALCULOS = [calcular_area_compuesta, calcular_volumen_compuesto]
+
+
+@pytest.mark.parametrize("calcular", CALCULOS)
+@pytest.mark.parametrize(
+    ("figura", "mensaje"),
+    [
+        (["cubo", {"lado": 2}], r"Figura 1: el descriptor debe ser un mapeo"),
+        (None, r"Figura 1: el descriptor debe ser un mapeo"),
+        ({"parametros": {"lado": 2}}, r"Figura 1: falta la clave 'tipo'"),
+        ({"tipo": "cubo"}, r"Figura 1: falta la clave 'parametros'"),
+        ({"tipo": ["cubo"], "parametros": {}}, r"Figura 1: 'tipo' debe ser un texto"),
+        (
+            {"tipo": "cubo", "parametros": [2]},
+            r"Figura 1: 'parametros' debe ser un mapeo",
+        ),
+    ],
+)
+def test_estructura_invalida_lanza_value_error(calcular, figura, mensaje):
+    primera = {"tipo": "rectangulo", "parametros": {"base": 1, "altura": 1}}
+    if calcular is calcular_volumen_compuesto:
+        primera = VALIDA
+
+    with pytest.raises(ValueError, match=mensaje):
+        calcular([primera, figura])
