@@ -32,11 +32,11 @@ def load(path: str) -> dict:
 
     Returns:
         Diccionario con la configuración cargada.
-        Retorna dict vacío si el archivo está vacío.
 
     Raises:
         FileNotFoundError: Si el archivo no existe.
-        yaml.YAMLError: Si el archivo tiene formato YAML inválido.
+        yaml.YAMLError: Si el archivo tiene formato YAML inválido, está vacío
+            o su raíz no es un mapa.
 
     Examples:
         >>> config = load("config.yaml")
@@ -54,8 +54,11 @@ def load(path: str) -> dict:
         except yaml.YAMLError as e:
             raise yaml.YAMLError(f"Error al parsear el archivo YAML: {e}")
 
-    if contenido is None:
-        return {}
+    if not isinstance(contenido, dict):
+        raise yaml.YAMLError(
+            f"La raíz del archivo de configuración {path} debe ser un mapa, "
+            f"se recibió {type(contenido).__name__}"
+        )
 
     return contenido
 
