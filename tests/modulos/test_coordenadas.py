@@ -1,4 +1,4 @@
-from escuadra.modulos.geometria.coordenadas import (
+from chuspacalc.modulos.geometria.coordenadas import (
     cartesiana_a_cilindrica,
     cartesiana_a_esferica,
     cartesiana_a_polar,
