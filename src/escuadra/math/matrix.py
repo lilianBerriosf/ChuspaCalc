@@ -65,6 +65,8 @@ def multiplicar(a: list[list[float]], b: list[list[float]]) -> list[list[float]]
         >>> multiplicar([[1, 2], [3, 4]], [[5, 6], [7, 8]])
         [[19, 22], [43, 50]]
     """
+    _validar_matriz(a)
+    _validar_matriz(b)
     filas_a = len(a)
     cols_a = len(a[0])
     cols_b = len(b[0])
@@ -81,8 +83,18 @@ def multiplicar(a: list[list[float]], b: list[list[float]]) -> list[list[float]]
     ]
 
 
+def _validar_matriz(m: list[list[float]]) -> None:
+    """Valida que la matriz no esté vacía y que sus filas tengan igual longitud."""
+    if not m or not m[0]:
+        raise ValueError("La matriz no puede estar vacía.")
+    if any(len(fila) != len(m[0]) for fila in m):
+        raise ValueError("Todas las filas deben tener la misma longitud.")
+
+
 def _validar_dimensiones(a: list[list[float]], b: list[list[float]]) -> None:
     """Valida que dos matrices tengan las mismas dimensiones."""
+    _validar_matriz(a)
+    _validar_matriz(b)
     if len(a) != len(b) or len(a[0]) != len(b[0]):
         raise ValueError(
             f"Dimensiones incompatibles: {len(a)}x{len(a[0])} y {len(b)}x{len(b[0])}"
