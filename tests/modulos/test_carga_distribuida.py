@@ -66,3 +66,19 @@ def test_fin_carga_fuera_de_la_viga_lanza_value_error():
     mensaje = "fin_carga no puede superar la longitud de la viga"
     with pytest.raises(ValueError, match=mensaje):
         calcular_reacciones_carga_parcial(10, 2, 0, 11)
+
+
+@pytest.mark.parametrize("no_finito", [float("nan"), float("inf"), float("-inf")])
+@pytest.mark.parametrize(
+    "parametro", ["longitud_viga", "carga_por_metro", "inicio_carga", "fin_carga"]
+)
+def test_parametro_no_finito_lanza_value_error(parametro, no_finito):
+    valores = {
+        "longitud_viga": 10,
+        "carga_por_metro": 5,
+        "inicio_carga": 2,
+        "fin_carga": 6,
+    }
+    valores[parametro] = no_finito
+    with pytest.raises(ValueError, match=f"{parametro} debe ser un número finito"):
+        calcular_reacciones_carga_parcial(**valores)

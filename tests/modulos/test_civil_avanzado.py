@@ -144,3 +144,12 @@ def test_momento_flector_carga_distribuida():
     assert resultado["momento_max"] == pytest.approx(
         esperado
     )
+
+
+@pytest.mark.parametrize("no_finito", [float("nan"), float("inf"), float("-inf")])
+@pytest.mark.parametrize("parametro", ["longitud", "carga"])
+def test_momento_flector_parametro_no_finito_lanza_error(parametro, no_finito):
+    valores = {"longitud": 4, "carga": 10}
+    valores[parametro] = no_finito
+    with pytest.raises(ValueError, match=f"'{parametro}' debe ser un número finito"):
+        calcular_momento_max(**valores)

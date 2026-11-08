@@ -1,3 +1,4 @@
+import math
 from typing import Any, Dict
 
 
@@ -27,6 +28,10 @@ def calcular_momento_max(
     Raises:
         ValueError: Si longitud <= 0, carga <= 0 o tipo_carga no es válido.
     """
+    for nombre, valor in (("longitud", longitud), ("carga", carga)):
+        if not math.isfinite(valor):
+            raise ValueError(f"El parámetro '{nombre}' debe ser un número finito.")
+
     if longitud <= 0:
         raise ValueError(
             f"El parámetro 'longitud' debe ser mayor que cero. "
