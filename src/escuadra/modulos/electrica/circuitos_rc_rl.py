@@ -1,19 +1,39 @@
 import math
+from numbers import Real
+
+
+def _validar_finito(valor: Real, nombre: str) -> None:
+    if isinstance(valor, bool) or not isinstance(valor, Real):
+        raise ValueError(f"{nombre} debe ser un numero real finito")
+
+    if isinstance(valor, int):
+        return
+
+    if not math.isfinite(valor):
+        raise ValueError(f"{nombre} debe ser un numero real finito")
 
 
 def calcular_constante_tiempo_rc(resistencia: float, capacitancia: float) -> float:
+    _validar_finito(resistencia, "La resistencia")
+    _validar_finito(capacitancia, "La capacitancia")
+
     if resistencia <= 0:
         raise ValueError("La resistencia debe ser mayor que 0")
     if capacitancia <= 0:
         raise ValueError("La capacitancia debe ser mayor que 0")
+
     return resistencia * capacitancia
 
 
 def calcular_constante_tiempo_rl(resistencia: float, inductancia: float) -> float:
+    _validar_finito(resistencia, "La resistencia")
+    _validar_finito(inductancia, "La inductancia")
+
     if resistencia <= 0:
         raise ValueError("La resistencia debe ser mayor que 0")
     if inductancia <= 0:
         raise ValueError("La inductancia debe ser mayor que 0")
+
     return inductancia / resistencia
 
 
@@ -22,6 +42,10 @@ def calcular_voltaje_carga_capacitor(
     tiempo: float,
     constante_tiempo: float
 ) -> float:
+    _validar_finito(voltaje_fuente, "El voltaje")
+    _validar_finito(tiempo, "El tiempo")
+    _validar_finito(constante_tiempo, "La constante de tiempo")
+
     if constante_tiempo <= 0:
         raise ValueError("La constante de tiempo debe ser mayor que 0")
     if tiempo < 0:
@@ -57,6 +81,8 @@ def analisis_transitorio(
     """
     if tipo not in ("RC", "RL"):
         raise ValueError("El tipo de circuito debe ser 'RC' o 'RL'")
+
+    _validar_finito(tension, "La tension")
 
     if tipo == "RC":
         tau = calcular_constante_tiempo_rc(resistencia, componente)
