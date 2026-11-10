@@ -6,12 +6,14 @@ Pruebas para los wrappers de herramientas matemáticas:
 """
 
 import pytest
-
+from chuspacalc.modulos.matematicas.herramienta_calculadora_cientifica import (
+    HerramientaCalculadoraCientifica,
+)
+from chuspacalc.modulos.matematicas.herramienta_conversion_unidades import (
+    HerramientaConversionUnidades,
+)
+from chuspacalc.modulos.matematicas.herramienta_sistemas_lineales import HerramientaSistemasLineales
 from PySide6.QtWidgets import QApplication
-
-from escuadra.modulos.matematicas.herramienta_conversion_unidades import HerramientaConversionUnidades
-from escuadra.modulos.matematicas.herramienta_calculadora_cientifica import HerramientaCalculadoraCientifica
-from escuadra.modulos.matematicas.herramienta_sistemas_lineales import HerramientaSistemasLineales
 
 
 @pytest.fixture
@@ -78,7 +80,12 @@ class TestHerramientaConversionUnidades:
 
         assert herramienta.resultado_output.text() == "1000.0"
 
-    @pytest.mark.xfail(reason="La conversión de temperatura no se actualiza correctamente en el entorno de prueba de Qt")
+    @pytest.mark.xfail(
+        reason=(
+            "La conversión de temperatura no se actualiza correctamente "
+            "en el entorno de prueba de Qt"
+        )
+    )
     def test_conversion_temperatura(self, app, qtbot):
         """Verifica la conversión de temperatura"""
         herramienta = HerramientaConversionUnidades()
@@ -181,7 +188,12 @@ class TestHerramientaSistemasLineales:
         assert hasattr(herramienta, '_inputs_b')
         assert hasattr(herramienta, '_resultado_label')
 
-    @pytest.mark.xfail(reason="El sistema 2x2 no se resuelve correctamente en el entorno de prueba de Qt")
+    @pytest.mark.xfail(
+        reason=(
+            "El sistema 2x2 no se resuelve correctamente "
+            "en el entorno de prueba de Qt"
+        )
+    )
     def test_resolver_sistema_2x2(self, app, qtbot):
         """Verifica la resolución de un sistema 2x2"""
         herramienta = HerramientaSistemasLineales()

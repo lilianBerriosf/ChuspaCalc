@@ -1,3 +1,9 @@
+from chuspacalc.core.carrera import Carrera
+from chuspacalc.core.herramienta import Herramienta
+from chuspacalc.modulos.sistemas.complemento_a_2 import (
+    complemento_a_decimal,
+    decimal_a_complemento,
+)
 from PySide6.QtWidgets import (
     QComboBox,
     QHBoxLayout,
@@ -6,13 +12,6 @@ from PySide6.QtWidgets import (
     QPushButton,
     QVBoxLayout,
     QWidget,
-)
-
-from escuadra.core.carrera import Carrera
-from escuadra.core.herramienta import Herramienta
-from escuadra.modulos.sistemas.complemento_a_2 import (
-    complemento_a_decimal,
-    decimal_a_complemento,
 )
 
 

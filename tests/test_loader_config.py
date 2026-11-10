@@ -2,12 +2,12 @@
 Pruebas para el módulo config/loader.py
 """
 
-import pytest
-import yaml
 import os
 import tempfile
 
-from escuadra.config.loader import load
+import pytest
+import yaml
+from chuspacalc.config.loader import load
 
 
 class TestConfigLoader:
@@ -17,7 +17,7 @@ class TestConfigLoader:
         """Verifica que carga un archivo YAML válido correctamente"""
         config_data = {
             "app": {
-                "name": "Escuadra",
+                "name": "ChuspaCalc",
                 "version": "0.1.0"
             },
             "logging": {
@@ -36,16 +36,47 @@ class TestConfigLoader:
             os.unlink(temp_path)
 
     def test_load_empty_yaml(self):
-        """Verifica que carga un archivo YAML vacío correctamente"""
+        """Verifica que rechaza un archivo YAML vacío indicando el archivo"""
         with tempfile.NamedTemporaryFile(mode='w', suffix='.yaml', delete=False) as f:
             f.write("")
             temp_path = f.name
 
         try:
-            result = load(temp_path)
-            assert result == {}
+            with pytest.raises(yaml.YAMLError) as excinfo:
+                load(temp_path)
+
+            assert temp_path in str(excinfo.value)
         finally:
             os.unlink(temp_path)
+
+    def test_load_raiz_mapa(self, tmp_path):
+        """Verifica que una raíz de tipo mapa se carga como antes"""
+        archivo = tmp_path / "config.yaml"
+        archivo.write_text("font_scale: 1.25\n", encoding="utf-8")
+
+        assert load(str(archivo)) == {"font_scale": 1.25}
+
+    @pytest.mark.parametrize(
+        "contenido, tipo",
+        [
+            ("- a\n- b\n", "list"),
+            ("hola\n", "str"),
+            ("42\n", "int"),
+            ("3.5\n", "float"),
+            ("true\n", "bool"),
+            ("null\n", "NoneType"),
+        ],
+    )
+    def test_load_raiz_no_mapa(self, tmp_path, contenido, tipo):
+        """Verifica que rechaza raíces que no son mapas indicando archivo y tipo"""
+        archivo = tmp_path / "config.yaml"
+        archivo.write_text(contenido, encoding="utf-8")
+
+        with pytest.raises(yaml.YAMLError) as excinfo:
+            load(str(archivo))
+
+        assert str(archivo) in str(excinfo.value)
+        assert tipo in str(excinfo.value)
 
     def test_load_file_not_found(self):
         """Verifica que lanza FileNotFoundError si el archivo no existe"""
@@ -74,14 +105,14 @@ class TestConfigLoader:
             f.write("""
 # Comentario
 app:
-  name: Escuadra  # Comentario inline
+  name: ChuspaCalc  # Comentario inline
   version: 0.1.0
 """)
             temp_path = f.name
 
         try:
             result = load(temp_path)
-            assert result["app"]["name"] == "Escuadra"
+            assert result["app"]["name"] == "ChuspaCalc"
             assert result["app"]["version"] == "0.1.0"
         finally:
             os.unlink(temp_path)
@@ -90,7 +121,7 @@ app:
         """Verifica que carga configuración anidada correctamente"""
         config_data = {
             "app": {
-                "name": "Escuadra",
+                "name": "ChuspaCalc",
                 "settings": {
                     "debug": True,
                     "theme": "dark"

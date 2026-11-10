@@ -32,6 +32,24 @@ class Historial:
         if len(self._historial) > self.LIMITE:
             self._historial.pop(0)
 
+    def editar_nota(self, timestamp: str, nota: str) -> bool:
+        """
+        Actualiza la nota de una entrada identificada por su timestamp.
+
+        Args:
+            timestamp: Marca de tiempo de la entrada que se editará.
+            nota: Texto de la nueva nota.
+
+        Returns:
+            True si se actualizó la nota; False si la entrada no existe.
+        """
+        for entrada in self._historial:
+            if entrada["timestamp"] == timestamp:
+                entrada["nota"] = nota
+                return True
+
+        return False
+
     def obtener_historial(self) -> list:
         """
         Retorna el historial más reciente primero.

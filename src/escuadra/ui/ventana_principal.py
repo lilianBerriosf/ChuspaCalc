@@ -1,16 +1,17 @@
 """
-Módulo de la ventana principal de Escuadra.
+Módulo de la ventana principal de ChuspaCalc.
 Contiene la clase VentanaPrincipal que hereda de QMainWindow.
 """
 
 from typing import Callable
+
 from PySide6.QtGui import QAction, QKeySequence, QShortcut
 from PySide6.QtWidgets import QApplication, QMainWindow, QMenu, QStackedWidget, QStatusBar, QWidget
 
 
 class VentanaPrincipal(QMainWindow):
     """
-    Ventana principal de la aplicación Escuadra.
+    Ventana principal de la aplicación ChuspaCalc.
 
     Configura el título, tamaño, menú superior, área central,
     barra de estado y atajos de teclado. Expone puntos de extensión para que
@@ -20,7 +21,7 @@ class VentanaPrincipal(QMainWindow):
     def __init__(self, parent: QWidget | None = None) -> None:
         super().__init__(parent)
 
-        self.setWindowTitle("Escuadra")
+        self.setWindowTitle("ChuspaCalc")
         self.resize(1000, 700)
 
         self._configurar_menus()

@@ -43,7 +43,7 @@ Convierte números entre las bases 2, 8, 10 y 16. Acepta el número de entrada e
 **Uso desde código:**
 
 ```python
-from escuadra.modulos.sistemas.conversor_bases import convertir
+from ChuspaCalc.modulos.sistemas.conversor_bases import convertir
 
 # Decimal a hexadecimal
 resultado = convertir("255", base_origen=10, base_destino=16)
@@ -152,7 +152,7 @@ Permite consultar y convertir caracteres ASCII (rango 0–127) entre sus distint
 **Ejemplos:**
 
 ```python
-from escuadra.modulos.sistemas.tabla_ascii import caracter_a_ascii, ascii_a_caracter, listar_ascii_rango
+from ChuspaCalc.modulos.sistemas.tabla_ascii import caracter_a_ascii, ascii_a_caracter, listar_ascii_rango
 
 # Carácter a código
 caracter_a_ascii("A")
@@ -200,7 +200,7 @@ Convierte colores entre los modelos RGB, HEX y HSL. Útil para comprender cómo 
 **Ejemplos:**
 
 ```python
-from escuadra.modulos.sistemas.conversor_color import rgb_a_hex, hex_a_rgb, rgb_a_hsl
+from ChuspaCalc.modulos.sistemas.conversor_color import rgb_a_hex, hex_a_rgb, rgb_a_hsl
 
 # RGB a HEX
 rgb_a_hex(255, 0, 0)      # "#FF0000"  — rojo puro

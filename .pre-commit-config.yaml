@@ -20,7 +20,7 @@ repos:
     rev: v1.17.0
     hooks:
       - id: mypy
-        files: ^src/escuadra/core/
+        files: ^src/chuspacalc/core/
   - repo: https://github.com/compilerla/conventional-pre-commit
     rev: v4.4.0
     hooks:

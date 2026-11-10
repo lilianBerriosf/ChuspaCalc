@@ -1,5 +1,5 @@
 """
-Servidor HTTP local para exponer herramientas de Escuadra.
+Servidor HTTP local para exponer herramientas de ChuspaCalc.
 
 El servidor está desactivado por defecto y debe iniciarse
 explícitamente para permitir integraciones externas.
@@ -9,8 +9,8 @@ import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
 
-class ServidorEscuadra(BaseHTTPRequestHandler):
-    """Manejador HTTP local de Escuadra."""
+class ServidorChuspaCalc(BaseHTTPRequestHandler):
+    """Manejador HTTP local de ChuspaCalc."""
 
     def do_POST(self):
         """Procesa solicitudes POST."""
@@ -53,7 +53,7 @@ def iniciar_servidor(host="localhost", puerto=8000):
 
     servidor = HTTPServer(
         (host, puerto),
-        ServidorEscuadra
+        ServidorChuspaCalc
     )
 
     print(f"Servidor iniciado en http://{host}:{puerto}")

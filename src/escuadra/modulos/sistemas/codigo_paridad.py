@@ -1,6 +1,15 @@
 """Herramientas educativas para cálculo y verificación de bits de paridad."""
 
 
+def validar_cadena_binaria(cadena: str) -> None:
+    """Valida que la cadena no esté vacía y contenga únicamente caracteres '0' y '1'."""
+    if not cadena:
+        raise ValueError("La cadena de entrada no puede estar vacía.")
+
+    if not all(char in "01" for char in cadena):
+        raise ValueError("La cadena debe contener exclusivamente caracteres binarios ('0' y '1').")
+
+
 def calcular_bit_paridad(datos_binarios: str, tipo: str = "par") -> int:
     """
     Calcula el bit de paridad para una cadena binaria.
@@ -12,6 +21,8 @@ def calcular_bit_paridad(datos_binarios: str, tipo: str = "par") -> int:
     Returns:
         Bit de paridad calculado (0 o 1).
     """
+    validar_cadena_binaria(datos_binarios)
+
     unos = datos_binarios.count("1")
 
     if tipo == "par":
@@ -34,6 +45,8 @@ def verificar_paridad(datos_con_paridad: str, tipo: str = "par") -> bool:
     Returns:
         True si la paridad es correcta, False en caso contrario.
     """
+    validar_cadena_binaria(datos_con_paridad)
+
     cantidad_unos = datos_con_paridad.count("1")
 
     if tipo == "par":
@@ -43,3 +56,4 @@ def verificar_paridad(datos_con_paridad: str, tipo: str = "par") -> bool:
         return cantidad_unos % 2 != 0
 
     raise ValueError("El tipo debe ser 'par' o 'impar'")
+    

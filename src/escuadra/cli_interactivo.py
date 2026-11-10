@@ -1,13 +1,13 @@
 """
-Modo interactivo (REPL) para Escuadra CLI
+Modo interactivo (REPL) para ChuspaCalc CLI
 """
 
-from escuadra.registry import obtener_herramientas
+from chuspacalc.registry import obtener_herramientas
 
 
 def ejecutar_interactivo():
     while True:
-        print("\n=== ESCUADRA MODO INTERACTIVO ===\n")
+        print("\n=== ChuspaCalc MODO INTERACTIVO ===\n")
 
         # 1. Obtener herramientas desde el registry (OBLIGATORIO)
         herramientas = obtener_herramientas()

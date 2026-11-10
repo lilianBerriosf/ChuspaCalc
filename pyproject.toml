@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 
 # Metadatos del paquete
 [project]
-name = "escuadra"
+name = "chuspacalc"
 version = "0.1.0"
 description = "Herramientas de calculo de ingenieria civil y electrica"
 requires-python = ">=3.10"
@@ -23,8 +23,6 @@ classifiers = [
     "Intended Audience :: Science/Research",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
@@ -34,9 +32,9 @@ classifiers = [
 ]
 
 [project.urls]
-Repository = "https://github.com/sis-inf/escuadra"
-Documentation = "https://github.com/sis-inf/escuadra/blob/main/README.md"
-Issues = "https://github.com/sis-inf/escuadra/issues"
+Repository = "https://github.com/sis-inf/ChuspaCalc"
+Documentation = "https://github.com/sis-inf/ChuspaCalc/blob/main/README.md"
+Issues = "https://github.com/sis-inf/ChuspaCalc/issues"
 [project.optional-dependencies]
 dev = [
     "pytest>=8,<10",
@@ -50,7 +48,7 @@ dev = [
 ]
 
 [project.scripts]
-escuadra = "escuadra.cli:main"
+chuspacalc = "chuspacalc.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
@@ -93,7 +91,7 @@ markers = [
 ]
 
 [tool.coverage.run]
-source = ["src/escuadra"]
+source = ["src/chuspacalc"]
 omit = [
     "*/main.py",
     "*/ui/*"

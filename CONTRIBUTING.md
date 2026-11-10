@@ -1,6 +1,6 @@
 # Cómo contribuir a este proyecto
 
-¡Gracias por querer contribuir a **Escuadra**!
+¡Gracias por querer contribuir a **ChuspaCalc**!
 
 Este proyecto utiliza el **Forking Workflow**, por lo que cada contribuidor trabaja desde su propio fork antes de enviar cambios al repositorio principal.
 
@@ -106,20 +106,20 @@ Presiona el botón **Fork** en la esquina superior derecha del repositorio en Gi
 Tu fork quedará en:
 
 ```text
-https://github.com/TU-USUARIO/escuadra
+https://github.com/TU-USUARIO/ChuspaCalc
 ```
 
 ## 2. Clona tu fork
 
 ```bash
-git clone https://github.com/TU-USUARIO/escuadra.git
-cd escuadra
+git clone https://github.com/TU-USUARIO/ChuspaCalc.git
+cd ChuspaCalc
 ```
 
 ## 3. Agrega el repositorio original como upstream
 
 ```bash
-git remote add upstream https://github.com/sis-inf/escuadra.git
+git remote add upstream https://github.com/sis-inf/ChuspaCalc.git
 ```
 
 Verifica que quedó correctamente configurado:
@@ -131,10 +131,10 @@ git remote -v
 Salida esperada:
 
 ```text
-origin    https://github.com/TU-USUARIO/escuadra.git (fetch)
-origin    https://github.com/TU-USUARIO/escuadra.git (push)
-upstream  https://github.com/sis-inf/escuadra.git (fetch)
-upstream  https://github.com/sis-inf/escuadra.git (push)
+origin    https://github.com/TU-USUARIO/ChuspaCalc.git (fetch)
+origin    https://github.com/TU-USUARIO/ChuspaCalc.git (push)
+upstream  https://github.com/sis-inf/ChuspaCalc.git (fetch)
+upstream  https://github.com/sis-inf/ChuspaCalc.git (push)
 ```
 
 ## 4. Sincroniza antes de trabajar
@@ -191,9 +191,9 @@ Desde GitHub, abre un Pull Request con esta configuración:
 
 | Campo | Valor |
 |---|---|
-| Base repository | `sis-inf/escuadra` |
+| Base repository | `sis-inf/ChuspaCalc` |
 | Base branch | `dev` |
-| Head repository | `TU-USUARIO/escuadra` |
+| Head repository | `TU-USUARIO/ChuspaCalc` |
 | Compare branch | `tu-rama` |
 
 ## Recomendaciones para el PR
@@ -307,4 +307,4 @@ Si es tu primera vez contribuyendo:
 
 # ¡Gracias por contribuir al proyecto!
 
-Toda contribución grande o pequeña ayuda a mejorar Escuadra.
+Toda contribución grande o pequeña ayuda a mejorar ChuspaCalc.

@@ -18,7 +18,7 @@ def _on_seleccion_cambiada(self):
     self.btn_comparar.setEnabled(len(seleccionados) == 2)
 
 def _comparar_seleccion(self):
-    from src.escuadra.ui.dialogo_comparar_historial import DialogoCompararHistorial
+    from src.chuspacalc.ui.dialogo_comparar_historial import DialogoCompararHistorial
     seleccionados = self.lista_historial.selectedItems()
     if len(seleccionados) == 2:
         entrada1 = self._obtener_datos(seleccionados[0])

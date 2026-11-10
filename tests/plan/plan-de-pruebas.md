@@ -1,7 +1,7 @@
-# Plan de Pruebas - Proyecto Escuadra
+# Plan de Pruebas - Proyecto ChuspaCalc
 
 ## 1. Objetivo
-Garantizar la fiabilidad, precisión numérica y estabilidad de la suite de cálculo de ingeniería **Escuadra**, asegurando que los algoritmos matemáticos entreguen resultados exactos dentro de las tolerancias permitidas y que el sistema responda correctamente ante datos de entrada anómalos.
+Garantizar la fiabilidad, precisión numérica y estabilidad de la suite de cálculo de ingeniería **ChuspaCalc**, asegurando que los algoritmos matemáticos entreguen resultados exactos dentro de las tolerancias permitidas y que el sistema responda correctamente ante datos de entrada anómalos.
 
 ## 2. Alcance
 ### En alcance

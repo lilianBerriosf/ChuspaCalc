@@ -1,18 +1,16 @@
-from PySide6.QtWidgets import QWidget
-
-from escuadra.core.carrera import Carrera
-from escuadra.core.herramienta import Herramienta
-
-from escuadra.modulos.matematicas.numeros_complejos import (
-    sumar,
-    restar,
-    multiplicar,
+from chuspacalc.core.carrera import Carrera
+from chuspacalc.core.herramienta import Herramienta
+from chuspacalc.modulos.matematicas.numeros_complejos import (
+    conjugado,
     dividir,
     modulo,
-    conjugado,
-    rectangular_a_polar,
+    multiplicar,
     polar_a_rectangular,
+    rectangular_a_polar,
+    restar,
+    sumar,
 )
+from PySide6.QtWidgets import QWidget
 
 
 class HerramientaNumerosComplejos(Herramienta):

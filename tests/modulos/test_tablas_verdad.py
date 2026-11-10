@@ -3,8 +3,7 @@ Tests unitarios para la lógica de generación de tablas de verdad.
 """
 
 import pytest
-
-from escuadra.modulos.sistemas.herramienta_tablas_verdad import HerramientaTablasVerdad
+from chuspacalc.modulos.sistemas.herramienta_tablas_verdad import HerramientaTablasVerdad
 
 
 @pytest.fixture

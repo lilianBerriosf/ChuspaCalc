@@ -5,7 +5,7 @@ def calcular_potencia_trifasica(
     voltaje_linea: float,
     corriente_linea: float,
     factor_potencia: float,
-    conexion: str = "estrella"
+    conexion: str = "estrella",
 ) -> dict[str, float]:
     """
     Calcula la potencia trifásica activa, reactiva y aparente.
@@ -40,14 +40,14 @@ def calcular_potencia_trifasica(
     Raises:
         ValueError: Si los parámetros no son válidos
     """
-    if voltaje_linea <= 0:
-        raise ValueError("voltaje_linea debe ser mayor que 0")
+    if not math.isfinite(voltaje_linea) or voltaje_linea <= 0:
+        raise ValueError("voltaje_linea debe ser mayor que 0 y finito")
 
-    if corriente_linea <= 0:
-        raise ValueError("corriente_linea debe ser mayor que 0")
+    if not math.isfinite(corriente_linea) or corriente_linea <= 0:
+        raise ValueError("corriente_linea debe ser mayor que 0 y finita")
 
-    if factor_potencia <= 0 or factor_potencia > 1:
-        raise ValueError("factor_potencia debe estar entre 0 y 1")
+    if not math.isfinite(factor_potencia) or not 0 <= factor_potencia <= 1:
+        raise ValueError("factor_potencia debe estar entre 0 y 1 y ser finito")
 
     if conexion not in ("estrella", "triangulo"):
         raise ValueError("conexion debe ser 'estrella' o 'triangulo'")

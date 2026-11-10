@@ -58,7 +58,7 @@ Las funciones lanzan `ValueError` si los datos no forman un triángulo válido (
 ### Cálculo de áreas
 
 ```python
-from escuadra.modulos.geometria.calculo_area import (
+from ChuspaCalc.modulos.geometria.calculo_area import (
     area_triangulo,
     area_circulo,
     area_rectangulo,
@@ -72,7 +72,7 @@ print(area_rectangulo(8, 4))
 ### Cálculo de perímetros
 
 ```python
-from escuadra.modulos.geometria.perimetro import (
+from ChuspaCalc.modulos.geometria.perimetro import (
     perimetro_circulo,
     perimetro_cuadrado,
 )
@@ -84,7 +84,7 @@ print(perimetro_cuadrado(4))
 ### Cálculo de volúmenes
 
 ```python
-from escuadra.modulos.geometria.volumen import (
+from ChuspaCalc.modulos.geometria.volumen import (
     volumen_cubo,
     volumen_esfera,
 )
@@ -96,7 +96,7 @@ print(volumen_esfera(2))
 ### Resolución de triángulos
 
 ```python
-from escuadra.modulos.geometria.resolucion_triangulos import (
+from ChuspaCalc.modulos.geometria.resolucion_triangulos import (
     resolver_triangulo_lados,
     resolver_triangulo_lado_angulo,
 )

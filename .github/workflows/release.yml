@@ -43,7 +43,7 @@ jobs:
 
     environment:
       name: pypi
-      url: https://pypi.org/project/escuadra/
+      url: https://pypi.org/project/chuspacalc/
 
     permissions:
       id-token: write

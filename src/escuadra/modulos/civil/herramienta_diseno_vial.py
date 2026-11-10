@@ -1,14 +1,15 @@
 """
-Herramienta de Diseño Vial para Escuadra.
+Herramienta de Diseño Vial para ChuspaCalc.
 """
-from PySide6.QtWidgets import (
-    QHBoxLayout, QLabel, QLineEdit, QPushButton, QVBoxLayout, QWidget
+from chuspacalc.core.carrera import Carrera
+from chuspacalc.core.herramienta import Herramienta
+from chuspacalc.modulos.civil.diseno_vial import (
+    ErrorDisenoVial,
+    calcular_pendiente,
+    calcular_peralte_curva,
 )
-from escuadra.core.carrera import Carrera
-from escuadra.core.herramienta import Herramienta
-from escuadra.modulos.civil.diseno_vial import (
-    calcular_pendiente, calcular_peralte_curva, ErrorDisenoVial
-)
+from PySide6.QtWidgets import QHBoxLayout, QLabel, QLineEdit, QPushButton, QVBoxLayout, QWidget
+
 
 class HerramientaDisenoVial(Herramienta):
     nombre = "Diseño Vial"

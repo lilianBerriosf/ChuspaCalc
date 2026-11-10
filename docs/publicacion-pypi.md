@@ -2,7 +2,7 @@
 
 ## Descripción
 
-Este documento describe el proceso de publicación del paquete `escuadra` en PyPI mediante el workflow de release definido en `.github/workflows/release.yml`.
+Este documento describe el proceso de publicación del paquete `ChuspaCalc` en PyPI mediante el workflow de release definido en `.github/workflows/release.yml`.
 
 La publicación se inicia automáticamente cuando se realiza un `push` de un tag cuyo nombre comienza con `v`, por ejemplo:
 
@@ -134,7 +134,7 @@ También configura el entorno de publicación `pypi`.
 
 La dirección configurada para el proyecto es:
 
-`https://pypi.org/project/escuadra/`
+`https://pypi.org/project/ChuspaCalc/`
 
 ## Verificación de la publicación
 
@@ -150,13 +150,13 @@ Después de completar la publicación:
 Para comprobar la publicación, instalar el paquete desde PyPI:
 
 ```bash
-pip install escuadra
+pip install ChuspaCalc
 ```
 
 También puede instalarse una versión específica:
 
 ```bash
-pip install escuadra==0.1.1
+pip install ChuspaCalc==0.1.1
 ```
 
 ## Solución de problemas
@@ -212,5 +212,5 @@ Verificar que la versión publicada aparezca correctamente en PyPI y que las dep
 También se puede comprobar nuevamente la instalación con:
 
 ```bash
-pip install escuadra
+pip install ChuspaCalc
 ```

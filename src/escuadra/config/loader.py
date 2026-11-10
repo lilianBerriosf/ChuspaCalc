@@ -13,7 +13,7 @@ DEFAULT_FONT_SCALE = 1.0
 
 def _get_config_dir() -> Path:
     """Retorna el directorio de configuración del usuario."""
-    config_dir = Path.home() / ".config" / "escuadra"
+    config_dir = Path.home() / ".config" / "chuspacalc"
     config_dir.mkdir(parents=True, exist_ok=True)
     return config_dir
 
@@ -32,16 +32,16 @@ def load(path: str) -> dict:
 
     Returns:
         Diccionario con la configuración cargada.
-        Retorna dict vacío si el archivo está vacío.
 
     Raises:
         FileNotFoundError: Si el archivo no existe.
-        yaml.YAMLError: Si el archivo tiene formato YAML inválido.
+        yaml.YAMLError: Si el archivo tiene formato YAML inválido, está vacío
+            o su raíz no es un mapa.
 
     Examples:
         >>> config = load("config.yaml")
         >>> print(config)
-        {'nombre': 'escuadra', 'version': '1.0'}
+        {'nombre': 'ChuspaCalc', 'version': '1.0'}
     """
     archivo = Path(path)
 
@@ -54,8 +54,11 @@ def load(path: str) -> dict:
         except yaml.YAMLError as e:
             raise yaml.YAMLError(f"Error al parsear el archivo YAML: {e}")
 
-    if contenido is None:
-        return {}
+    if not isinstance(contenido, dict):
+        raise yaml.YAMLError(
+            f"La raíz del archivo de configuración {path} debe ser un mapa, "
+            f"se recibió {type(contenido).__name__}"
+        )
 
     return contenido
 

@@ -3,10 +3,8 @@ Pruebas de humo para el módulo ventana_principal.py
 """
 
 import pytest
-
+from chuspacalc.ui.ventana_principal import VentanaPrincipal
 from PySide6.QtWidgets import QApplication, QMainWindow
-
-from escuadra.ui.ventana_principal import VentanaPrincipal
 
 
 @pytest.fixture
@@ -42,7 +40,7 @@ class TestVentanaPrincipal:
         ventana = VentanaPrincipal()
         qtbot.addWidget(ventana)
 
-        assert ventana.windowTitle() == "Escuadra"
+        assert ventana.windowTitle() == "ChuspaCalc"
 
     def test_ventana_menu_archivo(self, app, qtbot):
         """Verifica que el menú Archivo existe"""

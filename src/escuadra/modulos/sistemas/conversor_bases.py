@@ -1,5 +1,20 @@
 BASES_SOPORTADAS = {2, 8, 10, 16}
 
+DIGITOS_POR_BASE = {
+    2: set("01"),
+    8: set("01234567"),
+    10: set("0123456789"),
+    16: set("0123456789ABCDEF"),
+}
+
+
+def _validar_digitos(numero: str, base: int) -> None:
+    cuerpo = numero[1:] if numero[:1] in "+-" else numero
+    for caracter in cuerpo:
+        if caracter not in DIGITOS_POR_BASE[base]:
+            raise ValueError(f"Carácter inválido '{caracter}' para base {base}")
+
+
 def convertir(numero: str, base_origen: int, base_destino: int) -> dict:
     """
     Convierte números entre bases 2, 8, 10 y 16.
@@ -15,6 +30,8 @@ def convertir(numero: str, base_origen: int, base_destino: int) -> dict:
         raise ValueError(f"Base destino no soportada: {base_destino}")
 
     numero = numero.strip().upper()
+
+    _validar_digitos(numero, base_origen)
 
     try:
         valor_decimal = int(numero, base_origen)
@@ -36,5 +53,5 @@ def convertir(numero: str, base_origen: int, base_destino: int) -> dict:
         "numero_original": numero,
         "base_origen": base_origen,
         "resultado": resultado,
-        "base_destino": base_destino
+        "base_destino": base_destino,
     }

@@ -2,6 +2,8 @@
 Herramientas para cálculo de cargas distribuidas parciales en vigas.
 """
 
+import math
+
 
 def calcular_reacciones_carga_parcial(
     longitud_viga,
@@ -13,6 +15,15 @@ def calcular_reacciones_carga_parcial(
     Calcula las reacciones en los apoyos para una carga
     distribuida uniforme aplicada sobre una parte de la viga.
     """
+
+    for nombre, valor in (
+        ("longitud_viga", longitud_viga),
+        ("carga_por_metro", carga_por_metro),
+        ("inicio_carga", inicio_carga),
+        ("fin_carga", fin_carga),
+    ):
+        if not math.isfinite(valor):
+            raise ValueError(f"{nombre} debe ser un número finito")
 
     if longitud_viga <= 0:
         raise ValueError("La longitud de la viga debe ser positiva")

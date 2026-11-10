@@ -1,10 +1,9 @@
 import threading
 
+from chuspacalc.ui.mensajes import mostrar_error_contextualizado
+from chuspacalc.ui.progress import ProgressIndicator
 from PySide6.QtGui import QFont
-from PySide6.QtWidgets import QFrame, QLabel, QVBoxLayout, QWidget, QPushButton, QApplication
-
-from escuadra.ui.progress import ProgressIndicator
-from escuadra.ui.mensajes import mostrar_error_contextualizado
+from PySide6.QtWidgets import QApplication, QFrame, QLabel, QPushButton, QVBoxLayout, QWidget
 
 
 class WidgetHerramienta(QWidget):
@@ -59,7 +58,8 @@ class WidgetHerramienta(QWidget):
         self.layout_principal.addWidget(encabezado)
         self.layout_principal.addWidget(separador)
         self.layout_principal.addWidget(self._contenido)
-        self.layout_principal.addWidget(self.btn_copiar)  # Tu botón se posiciona al final de manera fija
+        # Tu botón se posiciona al final de manera fija
+        self.layout_principal.addWidget(self.btn_copiar)
 
     def area_contenido(self):
         """

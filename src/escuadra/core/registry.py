@@ -1,7 +1,7 @@
 """
-Registry de herramientas de Escuadra.
+Registry de herramientas de ChuspaCalc.
 Descubre automáticamente todas las clases que heredan de Herramienta
-dentro del paquete escuadra.modulos.
+dentro del paquete chuspacalc.modulos.
 """
 
 import importlib
@@ -9,18 +9,20 @@ import inspect
 import logging
 import pkgutil
 
-import escuadra.modulos as _modulos_pkg
-from escuadra.core.carrera import Carrera
-from escuadra.core.herramienta import Herramienta
+import chuspacalc.modulos as _modulos_pkg
+from chuspacalc.core.carrera import Carrera
+from chuspacalc.core.herramienta import Herramienta
 
 logger = logging.getLogger(__name__)
 
 _cache: list[type[Herramienta]] | None = None
 
+_registros: dict[str, dict[str, str]] = {}
+
 
 def descubrir_herramientas() -> list[type[Herramienta]]:
     """
-    Recorre el paquete escuadra.modulos e importa todos los módulos
+    Recorre el paquete chuspacalc.modulos e importa todos los módulos
     cuyo nombre comience con 'herramienta_'. Devuelve una lista con
     todas las clases encontradas que heredan de Herramienta.
 
@@ -98,6 +100,48 @@ def buscar_por_nombre(nombre: str) -> type[Herramienta] | None:
         if herramienta.nombre == nombre:
             return herramienta
     return None
+
+
+def registrar(herramienta: type[Herramienta], metadata: dict[str, str]) -> None:
+    """
+    Valida y registra los metadatos de una herramienta.
+
+    Args:
+        herramienta: Clase de la herramienta a registrar.
+        metadata: Diccionario con las claves 'categoria' y 'descripcion'.
+
+    Raises:
+        ValueError: Si 'categoria' o 'descripcion' faltan o están vacías.
+    """
+    categoria = metadata.get("categoria")
+    descripcion = metadata.get("descripcion")
+
+    if not categoria or not str(categoria).strip():
+        raise ValueError("La metadata debe contener una 'categoria' no vacía.")
+    if not descripcion or not str(descripcion).strip():
+        raise ValueError("La metadata debe contener una 'descripcion' no vacía.")
+
+    _registros[herramienta.nombre] = {
+        "categoria": str(categoria).strip(),
+        "descripcion": str(descripcion).strip(),
+    }
+
+
+def obtener_por_categoria(categoria: str) -> list[type[Herramienta]]:
+    """
+    Devuelve las herramientas registradas de la categoría solicitada.
+
+    Args:
+        categoria: Categoría técnica de la herramienta.
+
+    Returns:
+        Lista de herramientas de la especialidad, o lista vacía si no hay.
+    """
+    return [
+        herramienta
+        for herramienta in descubrir_herramientas()
+        if herramienta.carrera is not None and herramienta.carrera.codigo == categoria
+    ]
 
 
 def limpiar_cache() -> None:

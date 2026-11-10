@@ -1,3 +1,10 @@
+from chuspacalc.core.carrera import Carrera
+from chuspacalc.core.herramienta import Herramienta
+from chuspacalc.modulos.geometria.transformaciones import (
+    escalar_punto,
+    rotar_punto,
+    trasladar_punto,
+)
 from PySide6.QtWidgets import (
     QComboBox,
     QDoubleSpinBox,
@@ -7,14 +14,6 @@ from PySide6.QtWidgets import (
     QStackedWidget,
     QVBoxLayout,
     QWidget,
-)
-
-from escuadra.core.carrera import Carrera
-from escuadra.core.herramienta import Herramienta
-from escuadra.modulos.geometria.transformaciones import (
-    escalar_punto,
-    rotar_punto,
-    trasladar_punto,
 )
 
 

@@ -1,6 +1,6 @@
 # Escuadra - Calculadora Técnica para Ingeniería
 
-[![CI](https://github.com/sis-inf/escuadra/actions/workflows/ci.yml/badge.svg)](https://github.com/sis-inf/escuadra/actions/workflows/ci.yml)
+[![CI](https://github.com/sis-inf/ChuspaCalc/actions/workflows/ci.yml/badge.svg)](https://github.com/sis-inf/ChuspaCalc/actions/workflows/ci.yml)
 [![Licencia MIT](https://img.shields.io/badge/licencia-MIT-blue.svg)](LICENSE)
 
 Una aplicación de escritorio que centraliza herramientas de cálculo especializadas para estudiantes y docentes de ingeniería.
@@ -48,9 +48,9 @@ Los estudiantes y docentes de ingeniería suelen necesitar realizar cálculos re
 
 **Escuadra** resuelve esto ofreciendo:
 
-✅ Una interfaz unificada y limpia.  
-✅ Herramientas organizadas por carrera.  
-✅ Resultados claros y, cuando es posible, con detalle del proceso.  
+✅ Una interfaz unificada y limpia.
+✅ Herramientas organizadas por carrera.
+✅ Resultados claros y, cuando es posible, con detalle del proceso.
 ✅ Un sistema extensible para que cualquier estudiante pueda agregar nuevas herramientas.
 
 ---

@@ -28,7 +28,7 @@ jobs:
 
       - name: Ejecutar Bandit
         run: |
-          bandit -r src/escuadra/ -ll -f json -o bandit-report.json
+          bandit -r src/chuspacalc/ -ll -f json -o bandit-report.json
 
       - name: Subir reporte Bandit
         uses: actions/upload-artifact@v7

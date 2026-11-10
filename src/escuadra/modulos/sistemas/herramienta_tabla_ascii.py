@@ -1,9 +1,16 @@
 """
-Herramienta de consulta de tabla ASCII para Escuadra.
+Herramienta de consulta de tabla ASCII para ChuspaCalc.
 Permite convertir caracteres a su codigo ASCII y viceversa,
 y listar rangos de la tabla ASCII estándar (0-127).
 """
 
+from chuspacalc.core.carrera import Carrera
+from chuspacalc.core.herramienta import Herramienta
+from chuspacalc.modulos.sistemas.tabla_ascii import (
+    ascii_a_caracter,
+    caracter_a_ascii,
+    listar_ascii_rango,
+)
 from PySide6.QtWidgets import (
     QHBoxLayout,
     QLabel,
@@ -13,14 +20,6 @@ from PySide6.QtWidgets import (
     QTableWidgetItem,
     QVBoxLayout,
     QWidget,
-)
-
-from escuadra.core.carrera import Carrera
-from escuadra.core.herramienta import Herramienta
-from escuadra.modulos.sistemas.tabla_ascii import (
-    ascii_a_caracter,
-    caracter_a_ascii,
-    listar_ascii_rango,
 )
 
 

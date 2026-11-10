@@ -1,5 +1,5 @@
 """
-Punto de entrada principal de la aplicación Escuadra.
+Punto de entrada principal de la aplicación ChuspaCalc.
 Integra todos los componentes: registry, ventana principal,
 constructor de menú y cargador de herramientas.
 """
@@ -7,22 +7,21 @@ constructor de menú y cargador de herramientas.
 import logging
 import sys
 
+from chuspacalc.config.loader import load_font_scale
+from chuspacalc.core.registry import descubrir_herramientas, herramientas_por_carrera
+from chuspacalc.ui.cargador_herramienta import CargadorHerramienta
+from chuspacalc.ui.constructor_menu import construir_menu
+from chuspacalc.ui.dialogo_acerca_de import mostrar_acerca_de
+from chuspacalc.ui.ventana_principal import VentanaPrincipal
+from chuspacalc.utils.logging_config import configurar_logging
 from PySide6.QtWidgets import QApplication, QMessageBox
-
-from escuadra.config.loader import load_font_scale
-from escuadra.core.registry import descubrir_herramientas, herramientas_por_carrera
-from escuadra.ui.cargador_herramienta import CargadorHerramienta
-from escuadra.ui.constructor_menu import construir_menu
-from escuadra.ui.dialogo_acerca_de import mostrar_acerca_de
-from escuadra.ui.ventana_principal import VentanaPrincipal
-from escuadra.utils.logging_config import configurar_logging
 
 logger = logging.getLogger(__name__)
 
 
 def main() -> None:
     """
-    Función principal de la aplicación Escuadra.
+    Función principal de la aplicación ChuspaCalc.
 
     Flujo de arranque:
     1. Configura el logging.

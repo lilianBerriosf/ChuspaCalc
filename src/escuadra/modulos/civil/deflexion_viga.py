@@ -19,15 +19,16 @@ def calcular_deflexion_max(
     - posicion (m)
     """
 
-    parametros = [
-        longitud,
-        carga,
-        modulo_elasticidad,
-        inercia,
-    ]
+    if longitud <= 0:
+        raise ValueError("La longitud de la viga debe ser mayor que cero")
 
-    if any(p <= 0 for p in parametros):
-        raise ValueError("Todos los parámetros deben ser mayores que 0")
+    if modulo_elasticidad <= 0 or inercia <= 0:
+        raise ValueError(
+            "La rigidez a flexión debe ser positiva (E e I deben ser mayores que cero)"
+        )
+
+    if carga <= 0:
+        raise ValueError("La carga debe ser mayor que cero")
 
     if tipo_carga == "puntual_central":
         delta = (

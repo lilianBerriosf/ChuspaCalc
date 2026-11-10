@@ -5,17 +5,15 @@ Pruebas para módulos eléctricos avanzados:
 """
 
 import pytest
-
-from escuadra.modulos.electrica.caida_tension import (
-    calcular_caida,
+from chuspacalc.modulos.electrica.caida_tension import (
+    PORCENTAJE_ADMISIBLE,
     RESISTIVIDADES,
     TENSION_REFERENCIA_V,
-    PORCENTAJE_ADMISIBLE
+    calcular_caida,
 )
-
-from escuadra.modulos.electrica.circuito_serie_paralelo import (
+from chuspacalc.modulos.electrica.circuito_serie_paralelo import (
+    resistencia_paralelo,
     resistencia_serie,
-    resistencia_paralelo
 )
 
 

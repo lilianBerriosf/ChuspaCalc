@@ -1,8 +1,11 @@
 """
-Herramienta de Potencia Trifásica para Escuadra.
+Herramienta de Potencia Trifásica para ChuspaCalc.
 Calcula la potencia activa, reactiva y aparente en sistemas trifásicos.
 """
 
+from chuspacalc.core.carrera import Carrera
+from chuspacalc.core.herramienta import Herramienta
+from chuspacalc.modulos.electrica.potencia_trifasica import calcular_potencia_trifasica
 from PySide6.QtWidgets import (
     QComboBox,
     QHBoxLayout,
@@ -12,10 +15,6 @@ from PySide6.QtWidgets import (
     QVBoxLayout,
     QWidget,
 )
-
-from escuadra.core.carrera import Carrera
-from escuadra.core.herramienta import Herramienta
-from escuadra.modulos.electrica.potencia_trifasica import calcular_potencia_trifasica
 
 
 class HerramientaPotenciaTrifasica(Herramienta):

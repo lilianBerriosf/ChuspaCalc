@@ -6,7 +6,7 @@ consultando dinámicamente al registry.
 import importlib
 import sys
 
-from escuadra.core import registry
+from chuspacalc.core import registry
 
 
 def _cargar_modulos_dinamicos() -> None:
@@ -14,7 +14,7 @@ def _cargar_modulos_dinamicos() -> None:
     if registry.MODULOS_DIR.exists():
         for archivo in registry.MODULOS_DIR.glob("*.py"):
             if archivo.name != "__init__.py":
-                nombre_modulo = f"escuadra.modulos.{archivo.stem}"
+                nombre_modulo = f"chuspacalc.modulos.{archivo.stem}"
                 try:
                     importlib.import_module(nombre_modulo)
                 except (ImportError, ModuleNotFoundError):

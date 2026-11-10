@@ -2,7 +2,19 @@
 Módulo para exportar resultados de cálculos a formato Markdown.
 """
 
+import re
 from typing import Any, Dict, List, Optional
+
+
+def _escapar_celda(valor: Any) -> str:
+    """
+    Convierte un valor a texto seguro para una celda de tabla Markdown.
+
+    Escapa las barras verticales anteponiéndoles una barra invertida y reemplaza
+    los saltos de línea por un espacio, para que la fila conserve sus columnas.
+    """
+    texto = str(valor).replace("|", r"\|")
+    return re.sub(r"\r\n|\r|\n", " ", texto)
 
 
 def exportar_markdown(
@@ -33,7 +45,7 @@ def exportar_markdown(
     markdown += "| Parámetro | Valor |\n"
     markdown += "|-----------|-------|\n"
     for clave, valor in parametros.items():
-        markdown += f"| {clave} | {valor} |\n"
+        markdown += f"| {_escapar_celda(clave)} | {_escapar_celda(valor)} |\n"
     markdown += "\n"
 
     # Resultado
@@ -68,12 +80,12 @@ def exportar_tabla(
     markdown = f"## {titulo}\n\n"
 
     # Encabezados
-    markdown += "| " + " | ".join(encabezados) + " |\n"
+    markdown += "| " + " | ".join(_escapar_celda(h) for h in encabezados) + " |\n"
     markdown += "| " + " | ".join(["---"] * len(encabezados)) + " |\n"
 
     # Filas
     for fila in filas:
-        markdown += "| " + " | ".join(str(valor) for valor in fila) + " |\n"
+        markdown += "| " + " | ".join(_escapar_celda(valor) for valor in fila) + " |\n"
 
     return markdown + "\n"
 

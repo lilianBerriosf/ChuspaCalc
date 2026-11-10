@@ -5,29 +5,30 @@ Pruebas para módulos de geometría:
 - volumen.py
 """
 
-import pytest
 import math
 
-from escuadra.modulos.geometria.calculo_area import (
-    area_triangulo,
-    area_circulo,
-    area_rectangulo
-)
+import pytest
 
+from escuadra.modulos.geometria.calculo_area import (
+    area_circulo,
+    area_rectangulo,
+    area_triangulo,
+)
 from escuadra.modulos.geometria.perimetro import (
     perimetro_circulo,
     perimetro_cuadrado,
+    perimetro_hexagono_regular,
+    perimetro_poligono_regular,
     perimetro_rectangulo,
+    perimetro_trapecio,
     perimetro_triangulo,
-    perimetro_hexagono_regular
 )
-
 from escuadra.modulos.geometria.volumen import (
-    volumen_cubo,
-    volumen_esfera,
     volumen_cilindro,
     volumen_cono,
-    volumen_paralelepipedo
+    volumen_cubo,
+    volumen_esfera,
+    volumen_paralelepipedo,
 )
 
 
@@ -212,3 +213,40 @@ class TestVolumen:
         with pytest.raises(ValueError) as excinfo:
             volumen_paralelepipedo(largo=0, ancho=3, alto=4)
         assert "dimensiones" in str(excinfo.value)
+
+
+@pytest.mark.parametrize(
+    "funcion,argumentos",
+    [
+        (area_triangulo, (3, 4)),
+        (area_circulo, (3,)),
+        (area_rectangulo, (3, 4)),
+        (perimetro_circulo, (3,)),
+        (perimetro_cuadrado, (3,)),
+        (perimetro_rectangulo, (3, 4)),
+        (perimetro_triangulo, (3, 4, 5)),
+        (perimetro_hexagono_regular, (3,)),
+        (perimetro_poligono_regular, (5, 3)),
+        (perimetro_trapecio, (3, 4, 5, 6)),
+        (volumen_cubo, (3,)),
+        (volumen_esfera, (3,)),
+        (volumen_cilindro, (3, 4)),
+        (volumen_cono, (3, 4)),
+        (volumen_paralelepipedo, (3, 4, 5)),
+    ],
+)
+@pytest.mark.parametrize(
+    "valor_invalido",
+    [0, -1, float("nan"), float("inf"), float("-inf")],
+)
+def test_dimensiones_invalidas(funcion, argumentos, valor_invalido):
+    for indice in range(len(argumentos)):
+        # n_lados representa una cantidad, no una longitud.
+        if funcion is perimetro_poligono_regular and indice == 0:
+            continue
+
+        valores = list(argumentos)
+        valores[indice] = valor_invalido
+
+        with pytest.raises(ValueError):
+            funcion(*valores)

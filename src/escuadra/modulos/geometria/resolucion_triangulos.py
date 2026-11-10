@@ -42,8 +42,17 @@ def resolver_triangulo_lado_angulo(
     Recibe un lado y dos ángulos.
     """
 
+    if not all(
+        isinstance(v, (int, float)) and math.isfinite(v)
+        for v in (a, angulo_a, angulo_b)
+    ):
+        raise ValueError("El lado y los ángulos deben ser números finitos")
+
     if a <= 0:
         raise ValueError("El lado debe ser mayor a cero")
+
+    if not 0 < angulo_a < 180 or not 0 < angulo_b < 180:
+        raise ValueError("Cada ángulo debe estar entre 0 y 180 grados")
 
     if angulo_a + angulo_b >= 180:
         raise ValueError("La suma de ángulos es inválida")

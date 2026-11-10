@@ -2,9 +2,9 @@
 Pruebas para el módulo progress.py (indicador de progreso)
 """
 
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock, patch
 
-from escuadra.ui.progress import mostrar_progreso, ProgressIndicator
+from chuspacalc.ui.progress import ProgressIndicator, mostrar_progreso
 
 
 class TestMostrarProgreso:
@@ -14,20 +14,26 @@ class TestMostrarProgreso:
         """Verifica que muestra 0% cuando current=0"""
         with patch('builtins.print') as mock_print:
             mostrar_progreso(0, 100)
-            mock_print.assert_called_with("\r[------------------------------] 0%", end="", flush=True)
+            mock_print.assert_called_with(
+                "\r[------------------------------] 0%", end="", flush=True
+            )
 
     def test_mostrar_progreso_50_porciento(self):
         """Verifica que muestra 50% cuando current=50"""
         with patch('builtins.print') as mock_print:
             mostrar_progreso(50, 100)
-            mock_print.assert_called_with("\r[===============---------------] 50%", end="", flush=True)
+            mock_print.assert_called_with(
+                "\r[===============---------------] 50%", end="", flush=True
+            )
 
     def test_mostrar_progreso_100_porciento(self):
         """Verifica que muestra 100% cuando current=100"""
         with patch('builtins.print') as mock_print:
             mostrar_progreso(100, 100)
             # Primera llamada: la barra con 100%
-            mock_print.assert_any_call("\r[==============================] 100%", end="", flush=True)
+            mock_print.assert_any_call(
+                "\r[==============================] 100%", end="", flush=True
+            )
             # Segunda llamada: salto de línea
             mock_print.assert_called_with()
 

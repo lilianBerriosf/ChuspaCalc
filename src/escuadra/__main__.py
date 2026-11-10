@@ -1,4 +1,4 @@
-from escuadra.cli import main
+from chuspacalc.cli import main
 
 if __name__ == "__main__":
     main()

@@ -6,11 +6,11 @@ Este paquete contiene las herramientas organizadas por carrera.
 
 Cada herramienta es un archivo Python con el prefijo `herramienta_`:
 
-`src/escuadra/modulos/<carrera>/herramienta_<nombre_corto>.py`
+`src/ChuspaCalc/modulos/<carrera>/herramienta_<nombre_corto>.py`
 
 Ejemplos:
-- `src/escuadra/modulos/sistemas/herramienta_conversion_bases.py`
-- `src/escuadra/modulos/electrica/herramienta_ley_ohm.py`
+- `src/ChuspaCalc/modulos/sistemas/herramienta_conversion_bases.py`
+- `src/ChuspaCalc/modulos/electrica/herramienta_ley_ohm.py`
 
 ## Estructura de carpetas
 ├── sistemas/
@@ -19,7 +19,7 @@ Ejemplos:
 ## Esqueleto de una herramienta
 
 ```python
-from escuadra.base import Herramienta
+from ChuspaCalc.base import Herramienta
 from PySide6.QtWidgets import QWidget
 
 class HerramientaNombreCorto(Herramienta):

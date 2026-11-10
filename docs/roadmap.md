@@ -1,6 +1,6 @@
-# 🗺️ Roadmap - Escuadra
+# 🗺️ Roadmap - ChuspaCalc
 
-Este documento presenta el **roadmap de funcionalidades planificadas** para el proyecto Escuadra, organizadas por módulo y con su nivel de prioridad.
+Este documento presenta el **roadmap de funcionalidades planificadas** para el proyecto ChuspaCalc, organizadas por módulo y con su nivel de prioridad.
 
 ---
 
@@ -118,4 +118,4 @@ Este documento presenta el **roadmap de funcionalidades planificadas** para el p
 
 - [Catálogo de herramientas](herramientas.md)
 - [Guía de contribución](CONTRIBUTING.md)
-- [Issues abiertos](https://github.com/sis-inf/escuadra/issues)
+- [Issues abiertos](https://github.com/sis-inf/ChuspaCalc/issues)

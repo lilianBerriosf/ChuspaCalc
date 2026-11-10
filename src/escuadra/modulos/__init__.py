@@ -1,1 +1,1 @@
-"""Módulos de escuadra."""
+"""Módulos de ChuspaCalc."""
