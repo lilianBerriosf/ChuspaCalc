@@ -1,43 +1,49 @@
 
+"""
+Calculadora del discriminante de una ecuación cuadrática.
+
+Fórmula:
+    D = b² - 4ac
+"""
+
+
 import math
-from numbers import Real
 
 
 def calcular_discriminante(a, b, c):
     """
     Calcula el discriminante de una ecuación cuadrática.
 
-    Fórmula:
-        D = b**2 - 4*a*c
-
     Args:
-        a: Coeficiente cuadrático, distinto de cero.
+        a: Coeficiente cuadrático.
         b: Coeficiente lineal.
         c: Término independiente.
 
     Returns:
-        float: Valor del discriminante.
+        El valor del discriminante.
 
     Raises:
-        ValueError: Si los coeficientes son inválidos.
+        TypeError: Si algún coeficiente no es numérico.
+        ValueError: Si algún coeficiente no es finito o si a es cero.
     """
-
     coeficientes = (a, b, c)
 
-    for coeficiente in coeficientes:
-        if (
-            isinstance(coeficiente, bool)
-            or not isinstance(coeficiente, Real)
-            or not math.isfinite(coeficiente)
-        ):
-            raise ValueError("Los coeficientes deben ser números reales finitos.")
+    for valor in coeficientes:
+        if isinstance(valor, bool) or not isinstance(valor, (int, float)):
+            raise TypeError("Los coeficientes deben ser números reales.")
+
+        if isinstance(valor, float) and not math.isfinite(valor):
+            raise ValueError("Los coeficientes deben ser números finitos.")
 
     if a == 0:
-        raise ValueError("El coeficiente a no puede ser cero.")
+        raise ValueError("El coeficiente principal a no puede ser cero.")
 
-    discriminante = b**2 - 4 * a * c
+    try:
+        discriminante = b ** 2 - 4 * a * c
+    except OverflowError as error:
+        raise ValueError("El resultado está fuera del rango permitido.") from error
 
-    if not math.isfinite(discriminante):
-        raise ValueError("El discriminante calculado no es finito.")
+    if isinstance(discriminante, float) and not math.isfinite(discriminante):
+        raise ValueError("El resultado debe ser un número finito.")
 
     return discriminante
